@@ -1,0 +1,50 @@
+version: '3.2'
+
+services:
+
+   apache-php:
+      build:
+         context: ./apache-php/
+      networks:
+         - frontend
+         - backend
+      links:
+         - database:database
+      ports:
+         - "80:80"
+      volumes:
+         - ../web/:/var/www/html/
+      container_name: "apache-php"
+
+   database:
+      image: mysql:latest
+      restart: always
+      networks:
+         - backend
+      ports:
+         - "3306:3306"
+      environment:
+         - MYSQL_DATABASE=keypass
+         - MYSQL_USER=user
+         - MYSQL_PASSWORD=password
+         - MYSQL_ROOT_PASSWORD=root
+      volumes:
+         - ./database/data/:/var/lib/mysql/
+      container_name: "mysql"
+
+   adminer:
+      image: adminer:latest
+      restart: always
+      links:
+         - database:database
+      networks:
+         - backend
+      ports:
+         - "8080:80"
+      environment:
+         - ADMINER_DEFAULT_SERVER=mysql
+      container_name: "adminer"
+
+networks:
+   frontend:
+   backend:
