@@ -1,14 +1,12 @@
 <?php
-
 /**
  * Classe utilitaire
  */
 class Utils {
-
     /**
      * Tableau des modules
      */
-    public static $modules = array(
+    public static array $modules = array(
         "utilisateur" => "ModuleUtilisateur",
         "accueil" => "ModuleAccueil",
         "compte" => "ModuleCompte"
@@ -18,7 +16,11 @@ class Utils {
      * Récupere une variable $_GET si définie, sinon la valeur par défaut
      */
     static function get($val, $def=null) {
-        return isset($_GET[$val]) ? $_GET[$val] : $def;
+        return $_GET[$val] ?? $def;
+    }
+
+    static function set($val, $val1) {
+        $_GET[$val] == $val1;
     }
 
     /**
@@ -41,7 +43,7 @@ class Utils {
      * Récupere une variable $_POST si définie, sinon la valeur par défaut
      */
     static function post($val, $def=null) {
-        return isset($_POST[$val]) ? $_POST[$val] : $def;
+        return $_POST[$val] ?? $def;
     }
 
     /**
@@ -58,13 +60,6 @@ class Utils {
                 $values[] = self::post($val, $def);
         }
         return $values;
-    }
-
-    /**
-     * Définit un variable $_SESSION
-     */
-    static function sessionSet($key, $val) {
-        $_SESSION[$key] = $val;
     }
 
     /**
@@ -94,7 +89,7 @@ class Utils {
      * Récupere un variable $_FILES si définie
      */
     static function fileGet($key) {
-        return isset($_FILES[$key]) ? $_FILES[$key] : null;
+        return $_FILES[$key] ?? null;
     }
 
     /**
@@ -119,5 +114,4 @@ class Utils {
         echo "<pre>$code $status</pre>";
         die;
     }
-
 }

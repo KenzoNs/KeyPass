@@ -48,10 +48,12 @@ class ModeleUtilisateur extends Connection {
     /**
      * Login d'un utilisateur
      */
-    function login($nom_utilisateur, $mot_de_passe) {
-        $hash = hash("sha256", $mot_de_passe);
-        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE nom_utilisateur = :nom_utilisateur AND mot_de_passe = :hash");
-        if(!$query->execute(array("nom_utilisateur" => $nom_utilisateur, "hash" => $hash))) {
+    function login($id_utilisateur, $mot_de_passe) {
+        self::connection();
+        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :id_utilisateur AND mot_de_passe = :mot_de_passe");
+        $query->execute(array("id_utilisateur" => $id_utilisateur, "mot_de_passe" => $mot_de_passe));
+        self::deconnection();
+        if(!$query) {
             return false;
         }
         else {

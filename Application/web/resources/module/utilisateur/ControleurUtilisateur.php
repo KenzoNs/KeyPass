@@ -1,6 +1,7 @@
 <?php
 include_once ("./resources/module/utilisateur/ModeleUtilisateur.php");
 include_once ("./resources/module/utilisateur/VueUtilisateur.php");
+include_once ("./resources/include/Security.php");
 
 class ControleurUtilisateur {
 
@@ -15,37 +16,40 @@ class ControleurUtilisateur {
     }
 
     public function displayLoginPage(){
-        $module = Utils::get("module", "utilisateur");
-        $error = Utils::get("error");
-        $nomUtilisateur = Utils::sessionGet("nom_utilisateur");
-        if($nomUtilisateur != null){
+        $nomUtilisateur = isset($_SESSION);
+        if($nomUtilisateur == null){
+            $module = Utils::get("module", "utilisateur");
+            $error = Utils::get("error");
+            $this->view->loginPage($module, $error);
+        }
+        else{
             Utils::error();
         }
-        $this->view->loginpage($module, $error);
 
     }
 
-
     public function login() {
-        $nom_utilisateur = Utils::post("nom_utilisateur");
+        $nom_utilisateur = Utils::post("identifiant_utilisateur");
         $mot_de_passe = Utils::post("mot_de_passe");
         if($nom_utilisateur != null && $mot_de_passe != null) {
+            $nom_utilisateur = Security::encrypt($nom_utilisateur);
+            $mot_de_passe = Security::encrypt($mot_de_passe);
             $utilisateur = $this->model->login($nom_utilisateur, $mot_de_passe);
             if($utilisateur != false) {
-                Utils::sessionSet("nom_utilisateur", $nom_utilisateur);
+                session_start($utilisateur);
                 header("Status: 301 Moved Permanently", false, 301);
                 header("Location: ?module=utilisateur&action=monprofil");
                 exit();
             }
             else {
                 header("Status: 301 Moved Permanently", false, 301);
-                header("Location: ?module=utilisateur&action=loginpage&error=Nom d'utilisateur et/ou mot de passe incorrect!");
+                header("Location: ?module=utilisateur&action=authentification&error=Nom d'utilisateur et/ou mot de passe incorrect");
                 exit();
             }
         }
         else {
             header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=utilisateur&action=loginpage&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
+            header("Location: ?module=utilisateur&action=authentification&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
             exit();
         }
     }

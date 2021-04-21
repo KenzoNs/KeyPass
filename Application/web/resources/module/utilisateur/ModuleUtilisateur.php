@@ -9,13 +9,13 @@ class ModuleUtilisateur {
     function __construct() {
         $this->controller = new ControleurUtilisateur();
 
-        $action = Utils::get("action", "loginpage");
+        $action = Utils::get("action", "authentification");
 
         switch ($action) {
             case "login":
                 $this->controller->login();
                 break;
-            case "loginpage":
+            case "authentification":
                 $this->controller->displayLoginPage();
                 break;
             case "recupmotdepasse":
