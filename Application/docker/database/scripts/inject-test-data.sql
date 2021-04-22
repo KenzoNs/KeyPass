@@ -7,7 +7,7 @@ VALUES (1, 'Informatique'),
        (2, 'Urgence');
 
 --
---	Table utilisateur
+--	Table user
 --
 
 INSERT INTO `utilisateur` (`id_utilisateur`, `id_groupe`, `nom`, `prenom`, `email`, `mot_de_passe`, `privileges`)

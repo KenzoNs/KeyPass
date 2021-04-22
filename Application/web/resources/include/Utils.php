@@ -3,14 +3,6 @@
  * Classe utilitaire
  */
 class Utils {
-    /**
-     * Tableau des modules
-     */
-    public static array $modules = array(
-        "utilisateur" => "ModuleUtilisateur",
-        "accueil" => "ModuleAccueil",
-        "compte" => "ModuleCompte"
-    );
 
     /**
      * Récupere une variable $_GET si définie, sinon la valeur par défaut
@@ -19,16 +11,13 @@ class Utils {
         return $_GET[$val] ?? $def;
     }
 
-    static function set($val, $val1) {
-        $_GET[$val] == $val1;
-    }
-
     /**
      * Récupere une liste de variable $_GET
      * si tableau indexé => les valeurs sont les variables à récupérer
      * si tableau associatif => les clés sont les variables à récupérer, les valeurs par défaut
      */
-    static function getMany($vals) {
+    static function getMany($vals): array
+    {
         $values = array();
         foreach ($vals as $val => $def) {
             if (is_int($val))
@@ -66,7 +55,7 @@ class Utils {
      * Récupere un variable $_SESSION si définie, sinon la valeur par défaut
      */
     static function sessionGet($val, $def=null) {
-        return isset($_SESSION[$val]) ? $_SESSION[$val] : $def;
+        return $_SESSION[$val] ?? $def;
     }
 
     /**
@@ -74,7 +63,8 @@ class Utils {
      * si tableau indexé => les valeurs sont les variables à récupérer
      * si tableau associatif => les clés sont les variables à récupérer, les valeurs les valeurs par défaut
      */
-    static function sessionGetMany($vals) {
+    static function sessionGetMany($vals): array
+    {
         $values = array();
         foreach ($vals as $val => $def) {
             if (is_int($val))
@@ -97,21 +87,19 @@ class Utils {
      * si module non précisé, deuxième chance pour récupérer la variable $_GET
      * si module demandé non déclaré ==> erreur HTTP 404
      */
-    static function loadModule($mod=null)
-    {
-        if (is_null($mod)) {
-            $mod = self::get("module");
-        }
-        if (is_null($mod) || !array_key_exists($mod, self::$modules)){
-            self::error();
-        }
-        include_once ("./resources/module/$mod/Module".ucwords($mod).".php");
-        return new self::$modules[$mod]();
-    }
 
     static function error($code=404, $status="Not Found") {
         http_response_code($code);
         echo "<pre>$code $status</pre>";
         die;
+    }
+
+    static function isConnected(): bool
+    {
+        return isset($_SESSION["nomUtilisateur"]);
+    }
+
+    static function deconnection(){
+        $_SESSION["nomUtilisateur"] == null;
     }
 }

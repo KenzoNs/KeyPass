@@ -29,7 +29,7 @@ class Connection{
     /**
      * @throws NotConnectedException
      */
-    static function deconnection()
+    static function disconnection()
     {
         if (self::$bdd == null){
             throw new NotConnectedException();

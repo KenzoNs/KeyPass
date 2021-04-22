@@ -9,7 +9,7 @@ SET time_zone = "+02:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Structure de la table `user`
 --
 
 DROP TABLE IF EXISTS `utilisateur`;
