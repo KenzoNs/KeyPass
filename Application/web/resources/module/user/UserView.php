@@ -1,4 +1,5 @@
 <?php
+include_once ("./resources/include/Module.php");
 class UserView {
     public function loginPage($module, $error) {?>
         <!DOCTYPE html>
@@ -12,7 +13,7 @@ class UserView {
             </head>
             <main>
                 <h1>Login</h1>
-                <form action="?module=user&action=login" method="post">
+                <form action="<?php ?>" method="post">
                     <div>
                         <label for="identifiant_utilisateur">Identifiant utilisateur: </label>
                         <input type="text" name="identifiant_utilisateur" id="identifiant_utilisateur">

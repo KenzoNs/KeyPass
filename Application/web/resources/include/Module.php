@@ -1,22 +1,30 @@
 <?php
 include_once ("./resources/include/ModuleManager.php");
-include_once ("./resources/include/Controler.php");
+include_once ("./resources/include/Controller.php");
+include_once ("./resources/include/Utils.php");
+include_once ("./resources/include/Url.php");
 
-abstract class Module {
+class Module {
 
-    private Controler $controler;
+    private String $name;
+    private Controller $controller;
     private array $actions;
 
-    public function __construct(Controler $controler, array $actions){
+    public function __construct(String $name, Controller $controller, array $actions){
 
-        $this->controler = $controler;
+        $this->name = $name;
+        $this->controller = $controller;
         $this->actions = $actions;
 
     }
 
-    public function getControler(): Controler
+    public function getName(){
+        return $this->name;
+    }
+
+    public function getController(): Controller
     {
-        return $this->controler;
+        return $this->controller;
     }
 
     public function getActions(): array
@@ -26,19 +34,15 @@ abstract class Module {
 
     public function isActionExist($action): bool
     {
-        if(in_array($action, $this->actions)){
-            return true;
-        }
-        return false;
+        return array_key_exists($action);
     }
 
     public function switchPage($action){
-        if($this::isActionExist($action)){
-            header("Status: 301 Moved Permanently", true, 301);
-            header("Location: ?module=".ModuleManager::getModule()."&action=".$action."");
-            $this->controler->$action();
+        if($this->isActionExist($action)){
+            Url::setActionUrl($action);
+            Url::updateUrl();
+            $this->controller->$action();
         }
-        Utils::error();
+        Utils::error(32, 'gfdgdf');
     }
-
 }

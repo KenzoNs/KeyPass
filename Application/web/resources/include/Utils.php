@@ -2,6 +2,7 @@
 /**
  * Classe utilitaire
  */
+include_once ("./resources/include/Url.php");
 class Utils {
 
     /**
@@ -102,4 +103,6 @@ class Utils {
     static function deconnection(){
         $_SESSION["nomUtilisateur"] == null;
     }
+
+
 }
