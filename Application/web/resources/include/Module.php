@@ -34,15 +34,18 @@ class Module {
 
     public function isActionExist($action): bool
     {
-        return array_key_exists($action);
+        return in_array($action, $this->actions);
     }
 
     public function switchPage($action){
-        if($this->isActionExist($action)){
+        if($action == null || $this->isActionExist($action)){
             Url::setActionUrl($action);
             Url::updateUrl();
             $this->controller->$action();
         }
-        Utils::error();
+        else{
+            Utils::error();
+        }
+
     }
 }

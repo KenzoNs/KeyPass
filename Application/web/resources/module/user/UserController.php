@@ -13,7 +13,7 @@ class UserController extends Controller {
     }
 
     public function loginPage(){
-        $module = ModuleManager::getModule();
+        $module = ModuleManager::getCurrentModule();
         $error = Utils::post("error");
         $this->getView()->loginPage($module, $error);
     }

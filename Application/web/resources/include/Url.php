@@ -1,32 +1,37 @@
 <?php
 
 include_once ("./resources/include/Module.php");
+include_once ("./resources/include/ModuleManager.php");
 
 class Url{
 
     private static ?String $url = null;
 
-    private static ?String $mod = null;
+    private static ?String $module = null;
 
     private static ?String $action = null;
 
+    private function __construct() {}
+
     static function init(){
-        self::$url = "Location: ?module=".self::$mod."&action=".self::$action."";
+        header( 'content-type: text/html; charset=utf-8');
+        self::$url = "Location: ?module=".self::$module."&action=".self::$action."";
     }
 
-    static function getUrl(){
+    public static function getUrl(): ?string
+    {
         return self::$url;
     }
 
-    static function setModuleUrl(Module $mod){
-        self::$mod = $mod->getName();
+    public static function setModuleUrl($module){
+        self::$module = $module;
     }
 
-    static function setActionUrl(String $action){
+    public static function setActionUrl($action){
         self::$action = $action;
     }
 
-    static function updateUrl(){
+    public static function updateUrl(){
         header("Status: 301 Moved Permanently", true, 301);
         header(self::$url);
     }

@@ -9,7 +9,10 @@ class Utils {
      * Récupere une variable $_GET si définie, sinon la valeur par défaut
      */
     static function get($val, $def=null) {
-        return $_GET[$val] ?? $def;
+        if ($_GET[$val] == null){
+            return $def;
+        }
+        return $_GET[$val];
     }
 
     /**
