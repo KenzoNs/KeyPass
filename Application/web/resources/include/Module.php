@@ -43,6 +43,6 @@ class Module {
             Url::updateUrl();
             $this->controller->$action();
         }
-        Utils::error(32, 'gfdgdf');
+        Utils::error();
     }
 }

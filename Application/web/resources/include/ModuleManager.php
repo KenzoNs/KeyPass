@@ -4,7 +4,7 @@ include_once ("./resources/include/Url.php");
 
 class ModuleManager {
 
-    private static Module $module;
+    private static ?Module $module=null;
 
     public static array $modules = array(
         "user" => "UserModule",
@@ -12,17 +12,8 @@ class ModuleManager {
         "account" => "AccountModule"
     );
 
-    private static $initialized = false;
-
     private function __construct() {}
 
-    private static function initialize()
-    {
-        if (self::$initialized)
-            return;
-        
-        self::$initialized = true;
-    }
     static function loadModule($mod)
     {
         if (is_null($mod)) {
@@ -35,7 +26,7 @@ class ModuleManager {
         self::setCurrentModule(new self::$modules[$mod]());
     }
 
-    static function getCurrentModule()
+    static function  getCurrentModule(): ?Module
     {
         return self::$module;
     }
@@ -44,7 +35,7 @@ class ModuleManager {
     {
         self::$module = $mod;
         if (self::$module == null){
-            Utils::error(45353, 'gdf');
+            Utils::error();
         }
         Url::setModuleUrl(self::$module);
     }

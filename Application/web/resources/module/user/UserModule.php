@@ -18,8 +18,7 @@ class UserModule extends Module {
             $module->switchPage("loginPage");
         }
         else{
-            Utils::error(342, 'fgdfgff');
+            Utils::error();
         }
-
     }
 }
