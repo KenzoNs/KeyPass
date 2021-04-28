@@ -13,12 +13,17 @@ class UserController extends Controller {
     }
 
     public function loginPage(){
-        $module = ModuleManager::getCurrentModule();
-        $error = Utils::post("error");
-        $this->getView()->loginPage($module, $error);
+        if (isset($_SESSION['user'])){
+            header("Status: 301 Moved Permanently", false, 301);
+            header("Location: ?module=home");
+        }
+        else{
+            $error = Utils::get("error");
+            $this->getView()->loginPage($error);
+        }
     }
 
-    public function login() {
+    public function doLogin() {
         $nom_utilisateur = Utils::post("identifiant_utilisateur");
         $mot_de_passe = Utils::post("mot_de_passe");
         if($nom_utilisateur != null && $mot_de_passe != null) {
@@ -26,14 +31,21 @@ class UserController extends Controller {
             $mot_de_passe = Security::encrypt($mot_de_passe);
             $utilisateur = $this->getModel()->login($nom_utilisateur, $mot_de_passe);
             if($utilisateur != null) {
-                session_start($utilisateur);
+
+                $_SESSION['user'] = $utilisateur;
+                header("Status: 301 Moved Permanently", false, 301);
+                header("Location: ?module=user&action=loginPage");
                 exit();
             }
             else {
+                header("Status: 301 Moved Permanently", false, 301);
+                header("Location: ?module=user&action=loginPage&error=Nom d'utilisateur et/ou mot de passe incorrect!");
                 exit();
             }
         }
         else {
+            header("Status: 301 Moved Permanently", false, 301);
+            header("Location: ?module=user&action=loginPage&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
             exit();
         }
     }

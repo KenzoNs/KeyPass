@@ -1,6 +1,6 @@
 <?php
 class UserView {
-    public function loginPage($module, $error) {?>
+    public function loginPage($error) {?>
         <!DOCTYPE html>
         <html lang="fr">
             <head>
@@ -11,7 +11,7 @@ class UserView {
             </head>
             <main>
                 <h1>Login</h1>
-                <form action="?module=utilisateur&action=login" method="post">
+                <form action="?module=user&action=doLogin" method="post">
                     <div>
                         <label for="identifiant_utilisateur">Identifiant utilisateur: </label>
                         <input type="text" name="identifiant_utilisateur" id="identifiant_utilisateur">

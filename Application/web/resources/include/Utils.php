@@ -2,17 +2,13 @@
 /**
  * Classe utilitaire
  */
-include_once ("./resources/include/Url.php");
 class Utils {
 
     /**
      * Récupere une variable $_GET si définie, sinon la valeur par défaut
      */
     static function get($val, $def=null) {
-        if ($_GET[$val] == null){
-            return $def;
-        }
-        return $_GET[$val];
+        return isset($_GET[$val]) ? $_GET[$val] : $def;
     }
 
     /**
@@ -36,7 +32,7 @@ class Utils {
      * Récupere une variable $_POST si définie, sinon la valeur par défaut
      */
     static function post($val, $def=null) {
-        return $_POST[$val] ?? $def;
+        return isset($_POST[$val]) ? $_POST[$val] : $def;
     }
 
     /**
@@ -55,11 +51,15 @@ class Utils {
         return $values;
     }
 
+    static function sessionSet($key, $val) {
+        $_SESSION[$key] = $val;
+    }
+
     /**
      * Récupere un variable $_SESSION si définie, sinon la valeur par défaut
      */
     static function sessionGet($val, $def=null) {
-        return $_SESSION[$val] ?? $def;
+        return isset($_SESSION[$val]) ? $_SESSION[$val] : $def;
     }
 
     /**
@@ -83,7 +83,7 @@ class Utils {
      * Récupere un variable $_FILES si définie
      */
     static function fileGet($key) {
-        return $_FILES[$key] ?? null;
+        return isset($_FILES[$key]) ? $_FILES[$key] : null;
     }
 
     /**
@@ -100,11 +100,11 @@ class Utils {
 
     static function isConnected(): bool
     {
-        return isset($_SESSION["nomUtilisateur"]);
+        return isset($_SESSION["user"]);
     }
 
     static function deconnection(){
-        $_SESSION["nomUtilisateur"] == null;
+        $_SESSION["user"] == null;
     }
 
 

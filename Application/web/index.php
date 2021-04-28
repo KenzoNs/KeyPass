@@ -1,11 +1,14 @@
 <?php
-
 include_once ("./resources/include/ModuleManager.php");
 include_once ("./resources/include/Utils.php");
-include_once ("./resources/include/Url.php");
+include_once ("./resources/include/Utils.php");
 
-Url::init();
-Url::updateUrl();
+session_start();
+$module = Utils::get('module');
 
-$module = Utils::get('module', 'user');
-ModuleManager::loadModule($module);
+if ($module == null){
+    ModuleManager::loadModule('user');
+}
+else{
+    ModuleManager::loadModule($module);
+}

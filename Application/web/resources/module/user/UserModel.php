@@ -50,7 +50,7 @@ class UserModel extends Connection {
      */
     function login($id_utilisateur, $mot_de_passe) {
         self::connection();
-        $query = self::$bdd->prepare("SELECT * FROM user WHERE id_utilisateur = :id_utilisateur AND mot_de_passe = :mot_de_passe");
+        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :id_utilisateur AND mot_de_passe = :mot_de_passe");
         $query->execute(array("id_utilisateur" => $id_utilisateur, "mot_de_passe" => $mot_de_passe));
         self::disconnection();
         if(!$query) {
