@@ -13,7 +13,7 @@ class HeaderView {
             <script src="javascript/javascript.js"></script>
         </head>
     <header>
-            <a href="?module=home">KeePass</a>
+    <a href="?module=home">KeePass</a>
         <div id="recherche">
             <form action="?module=home&action=search" method="get">
                 <input type="hidden" name="module" value="acceuil">

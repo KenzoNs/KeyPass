@@ -9,6 +9,8 @@ class UserModule extends Module {
 
     public function __construct() {
 
+
+
         $actions = array (
             "login", "doLogin", "disconnection"
         );

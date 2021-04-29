@@ -4,10 +4,14 @@ include_once ("./resources/module/user/UserView.php");
 include_once ("./resources/include/Security.php");
 include_once ("./resources/include/Controller.php");
 include_once ("./resources/include/Utils.php");
+include_once ("./resources/module/header/HeaderController.php");
 
 class UserController extends Controller {
 
+    private $header;
+
     public function __construct() {
+        $this->header = new HeaderController();
         parent::__construct(new UserModel(), new UserView());
     }
 

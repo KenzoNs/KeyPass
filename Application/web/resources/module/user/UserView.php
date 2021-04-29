@@ -6,25 +6,26 @@ class UserView {
             <head>
                 <meta charset="UTF-8">
                 <title>Authentification</title>
-                <link rel="stylesheet" href="css/normalize.css">
-                <link rel="stylesheet" href="css/global.css">
+                <link rel="stylesheet" href="../../resources/css/user.css">
+                <link rel="stylesheet" href="../../resources/css/global.css">
+                <link rel="stylesheet" href="../../resources/css/normalize.css">
             </head>
-            <main>
+            <body>
                 <div id="main_container">
-                    <h1>Login</h1>
+                    <img src="../../resources/images/banner.png" alt="banner">
                     <form action="?module=user&action=doLogin" method="post">
                         <div>
-                            <label for="user_id">Identifiant utilisateur: </label>
-                            <input type="text" name="user_id" id="user_id">
+                            <label for="user_id">Identifiant utilisateur </label>
+                            <input type="text" name="user_id" id="user_id" placeholder="Identifiant Utilisateur" required>
                         </div>
                         <div>
-                            <label for="user_password">Mot de passe: </label>
-                            <input type="password" name="user_password" id="user_password">
+                            <label for="user_password">Mot de passe </label>
+                            <input type="password" name="user_password" id="user_password" placeholder="Mot de passe" required>
                         </div>
                         <?=$error!=null?'<div class="error">'.$error.'</div>':''?>
-                    <input type="submit" value="Connexion">
-                </form>
-            </div>
-        </main>
+                        <input type="submit" value="Connexion">
+                    </form>
+                </div>
+            </body>
     <?php }
 }

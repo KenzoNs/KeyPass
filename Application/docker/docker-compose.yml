@@ -14,7 +14,7 @@ services:
          - "80:80"
       volumes:
          - ../web/:/var/www/html/
-         - ./apache-php/php.ini:/usr/local/etc/php/conf.d/php.ini
+         - ./apache-php/php.ini:/usr/local/etc/php/conf.d/custom.ini
 
       container_name: "apache-php"
 

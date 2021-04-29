@@ -22,7 +22,7 @@ class Connection{
                 }
             }
         } catch (PDOException $e) {
-            echo 'La connexion à la base de données a échoué';
+            echo $e;
             exit();
         }
     }
