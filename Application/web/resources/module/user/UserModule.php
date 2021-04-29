@@ -10,11 +10,11 @@ class UserModule extends Module {
     public function __construct() {
 
         $actions = array (
-            "loginPage", "doLogin"
+            "login", "doLogin", "disconnection"
         );
 
         parent::__construct("user", new UserController, $actions);
-        $action = Utils::get('action', 'loginPage');
+        $action = Utils::get('action', 'login');
         parent::switchPage($action);
     }
 }

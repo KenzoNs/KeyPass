@@ -12,7 +12,9 @@ class HeaderController extends Controller {
     }
 
     public function header($title){
-        $this->getView()->displayheader($title);
+        $module = Utils::get("module", "home");
+
+        $this->getView()->displayheader($title, $module);
     }
 
 }

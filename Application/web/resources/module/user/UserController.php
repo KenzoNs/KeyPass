@@ -7,12 +7,11 @@ include_once ("./resources/include/Utils.php");
 
 class UserController extends Controller {
 
-
     public function __construct() {
         parent::__construct(new UserModel(), new UserView());
     }
 
-    public function loginPage(){
+    public function login(){
         if (isset($_SESSION['user'])){
             header("Status: 301 Moved Permanently", false, 301);
             header("Location: ?module=home");
@@ -24,28 +23,69 @@ class UserController extends Controller {
     }
 
     public function doLogin() {
-        $nom_utilisateur = Utils::post("identifiant_utilisateur");
-        $mot_de_passe = Utils::post("mot_de_passe");
-        if($nom_utilisateur != null && $mot_de_passe != null) {
-            $nom_utilisateur = Security::encrypt($nom_utilisateur);
-            $mot_de_passe = Security::encrypt($mot_de_passe);
-            $utilisateur = $this->getModel()->login($nom_utilisateur, $mot_de_passe);
-            if($utilisateur != null) {
+        $userId = Utils::post("user_id");
+        $password = Utils::post("user_password");
+        if($userId != null && $password != null) {
+            $userId = Security::encrypt($userId);
+            $password = Security::encrypt($password);
+            $user= $this->getModel()->login($userId, $password);
+            if($user != null) {
 
-                $_SESSION['user'] = $utilisateur;
+                $_SESSION['user'] = $user;
                 header("Status: 301 Moved Permanently", false, 301);
-                header("Location: ?module=user&action=loginPage");
+                header("Location: ?module=home");
                 exit();
             }
             else {
                 header("Status: 301 Moved Permanently", false, 301);
-                header("Location: ?module=user&action=loginPage&error=Nom d'utilisateur et/ou mot de passe incorrect!");
+                header("Location: ?module=user&action=login&error=Nom d'utilisateur et/ou mot de passe incorrect!");
                 exit();
             }
         }
         else {
             header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=user&action=loginPage&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
+            header("Location: ?module=user&action=login&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
+            exit();
+        }
+    }
+
+    public function disconnection() {
+        if(isset($_SESSION['user'])){
+            session_unset();
+            session_destroy();
+            header("Status: 301 Moved Permanently", false, 301);
+            header("Location: ?module=user&action=login");
+            exit();
+        }
+        else{
+            header("Status: 301 Moved Permanently", false, 301);
+            header("Location: ?module=user&action=login&error=Accès refusé");
+            exit();
+        }
+
+
+        $userId = Utils::post("user_id");
+        $password = Utils::post("user_password");
+        if($userId != null && $password != null) {
+            $userId = Security::encrypt($userId);
+            $password = Security::encrypt($password);
+            $user= $this->getModel()->login($userId, $password);
+            if($user != null) {
+
+                $_SESSION['user'] = $user;
+                header("Status: 301 Moved Permanently", false, 301);
+                header("Location: ?module=home");
+                exit();
+            }
+            else {
+                header("Status: 301 Moved Permanently", false, 301);
+                header("Location: ?module=user&action=login&error=Nom d'utilisateur et/ou mot de passe incorrect!");
+                exit();
+            }
+        }
+        else {
+            header("Status: 301 Moved Permanently", false, 301);
+            header("Location: ?module=user&action=login&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
             exit();
         }
     }

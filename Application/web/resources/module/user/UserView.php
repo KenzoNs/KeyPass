@@ -10,19 +10,21 @@ class UserView {
                 <link rel="stylesheet" href="css/global.css">
             </head>
             <main>
-                <h1>Login</h1>
-                <form action="?module=user&action=doLogin" method="post">
-                    <div>
-                        <label for="identifiant_utilisateur">Identifiant utilisateur: </label>
-                        <input type="text" name="identifiant_utilisateur" id="identifiant_utilisateur">
-                    </div>
-                    <div>
-                        <label for="mot_de_passe">Mot de passe: </label>
-                        <input type="password" name="mot_de_passe" id="mot_de_passe">
-                    </div>
-                    <?=$error!=null?'<div class="error">'.$error.'</div>':''?>
-                <input type="submit" value="Connexion">
-            </form>
+                <div id="main_container">
+                    <h1>Login</h1>
+                    <form action="?module=user&action=doLogin" method="post">
+                        <div>
+                            <label for="user_id">Identifiant utilisateur: </label>
+                            <input type="text" name="user_id" id="user_id">
+                        </div>
+                        <div>
+                            <label for="user_password">Mot de passe: </label>
+                            <input type="password" name="user_password" id="user_password">
+                        </div>
+                        <?=$error!=null?'<div class="error">'.$error.'</div>':''?>
+                    <input type="submit" value="Connexion">
+                </form>
+            </div>
         </main>
     <?php }
 }

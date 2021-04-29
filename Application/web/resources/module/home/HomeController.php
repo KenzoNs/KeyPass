@@ -23,7 +23,7 @@ class HomeController extends Controller {
         else{
 
             header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=user&action=loginPage");
+            header("Location: ?module=user&action=login");
         }
     }
 

@@ -1,28 +1,21 @@
 <?php
 class HeaderView {
-    function displayHeader($title) { ?>
+    function displayHeader($title, $module) { ?>
         <!DOCTYPE html>
-        <html lang="en">
+        <html lang="fr">
         <head>
             <meta charset="UTF-8">
-            <title>SpeedRunnerTV : <?=$title?></title>
+            <title><?=$title?></title>
             <link rel="stylesheet" href="css/normalize.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-            <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="css/global.css">
+            <?=$module!=null?'<link rel="stylesheet" href="css/'.$module.'.css">':''?>
+            <script src="javascript/javascript.js"></script>
         </head>
-    <body onload="init()">
     <header>
-        <nav>
-            <a href="?module=acceuil">SpeedRunnerTV</a>
-            <a href="?module=jeu">Jeux</a>
-            <a href="?module=categorie">Catégories</a>
-            <a href="?module=evenement">Evénements</a>
-            <a href="#">Règles</a>
-            <a href="#" id="linkRecherche">Rechercher</a>
-        </nav>
+            <a href="?module=home">KeePass</a>
         <div id="recherche">
-            <form action="" method="get">
+            <form action="?module=home&action=search" method="get">
                 <input type="hidden" name="module" value="acceuil">
                 <input type="hidden" name="action" value="recherche">
                 <input type="text" name="search">
@@ -32,8 +25,8 @@ class HeaderView {
                 <input type="submit" value="Rechercher">
             </form>
         </div>
-        <div id="compte">
-        </div>
+        <a href="?module=user&action=viewMyAccount"><? echo Security::decrypt($_SESSION['user']['nom']), ' ', Security::decrypt($_SESSION['user']['prenom']) ?></a>
+        <a href="?module=user&action=disconnection"><button>Déconnexion</button></a>
     </header>
     <?php }
 }
