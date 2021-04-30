@@ -65,6 +65,26 @@ CREATE TABLE IF NOT EXISTS `compte` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `token`
+--
+
+DROP TABLE IF EXISTS `compte`;
+CREATE TABLE IF NOT EXISTS `compte` (
+    `id_compte` int(11) NOT NULL AUTO_INCREMENT,
+    `id_groupe` int(11) NOT NULL,
+    `id_utilisateur` varchar(150) NOT NULL,
+    `titre` varchar(150) NOT NULL,
+    `identifiant_compte` varchar(150) NOT NULL,
+    `mot_de_passe_compte` varchar(150) NOT NULL,
+    `url` varchar(300) NOT NULL,
+    `notes` varchar(150),
+    PRIMARY KEY (`id_compte`),
+    KEY `fk_id_groupe_compte` (`id_groupe`),
+    KEY `fk_id_utilisateur_compte` (`id_utilisateur`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+--
 -- Contraintes pour les tables déchargées
 --
 

@@ -1,20 +1,11 @@
 <?php
 include_once ("./resources/include/Connection.php");
+include_once ("./resources/include/Security.php");
 
 /**
  * Modele user
  */
 class UserModel extends Connection {
-
-    function getById($nom_utilisateur) {
-        $query = self::$bdd->prepare("SELECT * FROM user WHERE nom_utilisateur = :nom_utilisateur");
-        if(!$query->execute(array("nom_utilisateur" => $nom_utilisateur))) {
-            return false;
-        }
-        else {
-            return $query->fetch(PDO::FETCH_ASSOC);
-        }
-    }
 
     /**
      * Recupere le détail d'un user via son mail
@@ -27,6 +18,18 @@ class UserModel extends Connection {
         else {
             return $query->fetch(PDO::FETCH_ASSOC);
         }
+    }
+
+    /**
+     * Retourne vrai si l'email utilisateur existe
+     */
+    function isUserEmailExist($email) {
+        $email = Security::encrypt($email);
+        self::connection();
+        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE email = :email");
+        $query->execute(array("email" => $email));
+        self::disconnection();
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -48,17 +51,14 @@ class UserModel extends Connection {
     /**
      * Login d'un user
      */
-    function login($id_utilisateur, $mot_de_passe) {
+    function login($userId, $password) {
+        $userId = Security::encrypt($userId);
+        $password = Security::encrypt($password);
         self::connection();
-        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :id_utilisateur AND mot_de_passe = :mot_de_passe");
-        $query->execute(array("id_utilisateur" => $id_utilisateur, "mot_de_passe" => $mot_de_passe));
+        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :userId AND mot_de_passe = :password");
+        $query->execute(array("userId" => $userId, "password" => $password));
         self::disconnection();
-        if(!$query) {
-            return false;
-        }
-        else {
-            return $query->fetch(PDO::FETCH_ASSOC);
-        }
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -92,85 +92,6 @@ class UserModel extends Connection {
         }
         else {
             return true;
-        }
-    }
-
-    /**
-     * Mes videos
-     */
-    function videosDe($nom_utilisateur) {
-        $query = self::$bdd->prepare("SELECT video.id_video, video.date_publication, video.titre, video.description, video.nombre_likes,".
-            " video.vignette_video, categorie_speedrun.nom_categorie, jeu.nom ".
-            "FROM video INNER JOIN categorie_speedrun ON video.id_categorie_speedrun = categorie_speedrun.id_categorie ".
-            "INNER JOIN jeu ON video.id_jeu = jeu.id_jeu ".
-            "WHERE video.nom_utilisateur = :nom_utilisateur ".
-            "ORDER BY video.date_publication DESC");
-        if(!$query->execute(array("nom_utilisateur" => $nom_utilisateur))) {
-            return false;
-        }
-        else {
-            return $query->fetchAll(PDO::FETCH_ASSOC);
-        }
-    }
-
-    /**
-     * Liste des catégories
-     */
-    function listeCategories() {
-        $query = self::$bdd->query("SELECT * FROM categorie_speedrun");
-        if(!$query) {
-            return null;
-        }
-        else {
-            return $query->fetchAll(PDO::FETCH_ASSOC);
-        }
-    }
-
-    /**
-     * Liste des jeux
-     */
-    function listeJeux() {
-        $query = self::$bdd->query("SELECT * FROM jeu ORDER BY nom ASC");
-        if(!$query) {
-            return null;
-        }
-        else {
-            return $query->fetchAll(PDO::FETCH_ASSOC);
-        }
-    }
-
-    /**
-     * Ajouter une vidéo
-     */
-    function addvideo($nom_utilisateur, $titre, $id_categorie_speedrun, $id_jeu,
-                      $heure, $minute, $seconde, $description, $vignette_video, $fichier_video) {
-        $query = self::$bdd->prepare("INSERT INTO video (nom_utilisateur, titre, id_categorie_speedrun, id_jeu, date_publication, temps_run, ".
-            "description, vignette_video, fichier_video)".
-            "VALUES (:nom_utilisateur, :titre, :id_categorie_speedrun, :id_jeu, NOW(), :temps_run, ".
-            ":description, :vignette_video, :fichier_video)");
-        if(!$query->execute(array("nom_utilisateur" => $nom_utilisateur, "titre" => $titre, "id_categorie_speedrun" => intval($id_categorie_speedrun),
-            "id_jeu" => intval($id_jeu), "temps_run" => $heure.":".$minute.":".$seconde, "description" => $description,
-            "vignette_video" => $vignette_video, "fichier_video" => $fichier_video))) {
-            return $query->errorInfo()[2];
-        }
-        else {
-            return true;
-        }
-    }
-
-    /**
-     * Liste les abonnés
-     */
-    function listeAbonnes($nom_utilisateur) {
-        $query = self::$bdd->prepare("SELECT user.nom_utilisateur, user.nom, user.prenom, ".
-            "user.email ".
-            "FROM abonnement INNER JOIN user ON abonnement.nom_utilisateur_abonne = user.nom_utilisateur ".
-            "WHERE abonnement.nom_utilisateur_speedrunner = :nom_utilisateur AND user.email IS NOT NULL");
-        if(!$query->execute(array("nom_utilisateur" => $nom_utilisateur))) {
-            return false;
-        }
-        else {
-            return $query->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 }

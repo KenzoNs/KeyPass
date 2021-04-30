@@ -107,5 +107,44 @@ class Utils {
         $_SESSION["user"] == null;
     }
 
+    static function switchPage($module, $action=null){
+        header("Status: 301 Moved Permanently", false, 301);
+        if(isset($action)){
+            header("Location: ?module=".$module."&action=".$action."");
+        }
+        else{
+            header("Location: ?module=".$module."");
+        }
+        exit();
+    }
+
+    static function infoMessage($module, $action, $info){
+        header("Status: 301 Moved Permanently", false, 301);
+        header("Location: ?module=".$module."&action=".$action."&info=".$info."");
+        exit();
+    }
+
+    static function genCode(){
+        $haz=array
+        (1,
+            rand(2,3),
+            rand(4,5),
+            rand(6,7),
+            rand(8,9),0
+        );
+
+        shuffle($haz);
+        $co="";
+        $i=0;
+
+        while($i<6){
+            $co.= $haz[$i];
+            if(!in_array($co,$haz)){
+            }else{}
+            $i++;
+        }
+        return $co;
+    }
+
 
 }

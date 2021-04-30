@@ -9,11 +9,11 @@ class HomeModule extends Module {
     public function __construct() {
 
         $actions = array (
-            "homePage"
+            "home"
         );
 
         parent::__construct("user", new HomeController, $actions);
-        $action = Utils::get('action', 'homePage');
-        parent::switchPage($action);
+        $action = Utils::get('action', 'home');
+        parent::initPage($action);
     }
 }

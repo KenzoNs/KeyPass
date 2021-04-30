@@ -25,7 +25,7 @@ class HeaderView {
                 <input type="submit" value="Rechercher">
             </form>
         </div>
-        <a href="?module=user&action=viewMyAccount"><? echo Security::decrypt($_SESSION['user']['nom']), ' ', Security::decrypt($_SESSION['user']['prenom']) ?></a>
+        <a href="?module=user&action=viewMyAccount"><? echo Security::decrypt($_SESSION['user']['nom']), ' ', Security::decrypt($_SESSION['user']['prenom']), ' ',Security::decrypt($_SESSION['user']['email']) ?></a>
         <a href="?module=user&action=disconnection"><button>Déconnexion</button></a>
     </header>
     <?php }

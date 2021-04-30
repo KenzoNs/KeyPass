@@ -15,15 +15,13 @@ class HomeController extends Controller {
         parent::__construct(new HomeModel(), new HomeView());
     }
 
-    public function homePage(){
+    public function home(){
         if (isset($_SESSION['user'])){
             $this->header->header('Accueil');
             $this->getView()->homePage();
         }
         else{
-
-            header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=user&action=login");
+            Utils::infoMessage("user", "login", "Vous n'êtes pas connecté");
         }
     }
 

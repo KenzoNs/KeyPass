@@ -31,7 +31,7 @@ class Module {
         return in_array($action, $this->actions);
     }
 
-    public function switchPage($action){
+    public function initPage($action){
         if($action != null && $this->isActionExist($action)){
             $this->controller->$action();
         }

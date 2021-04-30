@@ -17,39 +17,70 @@ class UserController extends Controller {
 
     public function login(){
         if (isset($_SESSION['user'])){
-            header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=home");
+            Utils::switchPage('home');
         }
         else{
-            $error = Utils::get("error");
-            $this->getView()->loginPage($error);
+            $info = Utils::get("info");
+            $this->getView()->loginPage($info);
         }
     }
 
-    public function doLogin() {
-        $userId = Utils::post("user_id");
-        $password = Utils::post("user_password");
-        if($userId != null && $password != null) {
-            $userId = Security::encrypt($userId);
-            $password = Security::encrypt($password);
-            $user= $this->getModel()->login($userId, $password);
-            if($user != null) {
+    public function sendEmail(){
+        if (!isset($_SESSION['user'])){
+            $error = Utils::get("error");
+            $this->getView()->sendEmailPage($error);
+        }
+        else{
+            Utils::switchPage('home');
+        }
+    }
 
-                $_SESSION['user'] = $user;
-                header("Status: 301 Moved Permanently", false, 301);
-                header("Location: ?module=home");
-                exit();
+    public function doSendEmail(){
+        if (!isset($_SESSION['user'])){
+            $userEmail = Utils::post("user_mail");
+            if(isset($userEmail)){
+                $user = $this->getModel()->isUserEmailExist($userEmail);
+                if($user){
+                    if($this->createAndSendMail($user)){
+                        Utils::infoMessage('user', 'login', 'Un email vous a été envoyé');
+                    }
+                    Utils::infoMessage('user', 'login', 'Erreur envoie email');
+                }
+                else{
+                    Utils::infoMessage('user', 'sendEmail', 'Cet email n\'existe pas');
+                }
             }
-            else {
-                header("Status: 301 Moved Permanently", false, 301);
-                header("Location: ?module=user&action=login&error=Nom d'utilisateur et/ou mot de passe incorrect!");
-                exit();
+            else{
+                Utils::infoMessage('user', 'sendEmail', 'Veuillez renseigner votre email');
             }
         }
-        else {
-            header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=user&action=login&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
-            exit();
+        else{
+            Utils::switchPage('home');
+        }
+
+    }
+
+
+    public function doLogin() {
+        if(!isset($_SESSION['user'])) {
+            $userId = Utils::post("user_id");
+            $password = Utils::post("user_password");
+            if ($userId != null && $password != null) {
+                $user = $this->getModel()->login($userId, $password);
+                if ($user != null) {
+                    $_SESSION['user'] = $user;
+                    Utils::switchPage('home');
+                }
+                else {
+                    Utils::infoMessage('user', 'login', 'Nom d\'utilsateur et/ou mot de passe incorrect');
+                }
+            }
+            else {
+                Utils::infoMessage('user', 'login', 'Veuillez remplir tous les champs');
+            }
+        }
+        else{
+            Utils::switchPage('home');
         }
     }
 
@@ -57,40 +88,30 @@ class UserController extends Controller {
         if(isset($_SESSION['user'])){
             session_unset();
             session_destroy();
-            header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=user&action=login");
-            exit();
+            Utils::switchPage('user', 'login');
         }
         else{
-            header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=user&action=login&error=Accès refusé");
-            exit();
+            Utils::infoMessage("user", "login", "Accès refusé");
         }
+    }
 
 
-        $userId = Utils::post("user_id");
-        $password = Utils::post("user_password");
-        if($userId != null && $password != null) {
-            $userId = Security::encrypt($userId);
-            $password = Security::encrypt($password);
-            $user= $this->getModel()->login($userId, $password);
-            if($user != null) {
+    public function createAndSendMail($user){
+        $objet = 'Nouveau mot de passe';
+        $to = $user['email'];
 
-                $_SESSION['user'] = $user;
-                header("Status: 301 Moved Permanently", false, 301);
-                header("Location: ?module=home");
-                exit();
-            }
-            else {
-                header("Status: 301 Moved Permanently", false, 301);
-                header("Location: ?module=user&action=login&error=Nom d'utilisateur et/ou mot de passe incorrect!");
-                exit();
-            }
-        }
-        else {
-            header("Status: 301 Moved Permanently", false, 301);
-            header("Location: ?module=user&action=login&error=Veuillez renseigner nom d'utilisateur et/ou mot de passe!");
-            exit();
-        }
+        $header = "From: KeePass <no-reply@test.com> \n";
+        $header .= "Reply-To: ".$to."\n";
+        $header .= "MIME-version: 1.0\n";
+        $header .= "Content-Transfer-Encoding: 8bit";
+
+        $contenu ="<html>".
+        "<body>".
+        "<p style='text-align: center; font-size: 18px'><b>Bonjour Mr, Mme" .$user['nom']." ".$user['prenom']."</b>,</p><br/>".
+        "<p style='text-align: justify'><i><b>Nouveau mot de passe : </b></i>".Utils::genCode()."</p><br/>".
+        "</body>".
+        "</html>";
+
+        return mail($to, $objet, $contenu, $header);
     }
 }

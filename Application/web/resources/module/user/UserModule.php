@@ -12,11 +12,11 @@ class UserModule extends Module {
 
 
         $actions = array (
-            "login", "doLogin", "disconnection"
+            "login", "doLogin", "disconnection", "sendEmail", "doSendEmail"
         );
 
         parent::__construct("user", new UserController, $actions);
         $action = Utils::get('action', 'login');
-        parent::switchPage($action);
+        parent::initPage($action);
     }
 }
