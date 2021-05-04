@@ -1,8 +1,10 @@
 <?php
 class HomeView {
     public function homePage() {?>
-    <main>
-        salut
-    </main>
+    <body>
+        <div id="main_container">
+            salut
+        </div>
+    </body>
     <?php }
 }

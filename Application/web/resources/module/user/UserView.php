@@ -11,19 +11,23 @@ class UserView {
                 <link rel="stylesheet" href="../../resources/css/normalize.css">
             </head>
             <body>
-                <div id="main_container">
-                    <img src="../../resources/images/banner.png" alt="banner">
+                <div id="main_authentication_container">
+                    <div id="img_container">
+                        <img src="../../resources/images/banner.png" alt="banner">
+                    </div>
                     <form action="?module=user&action=doLogin" method="post">
-                        <div>
-                            <label for="user_id">Identifiant utilisateur </label>
+                        <div class="input_authentication_container">
+                            <label id="label_authentication" for="user_id">Identifiant utilisateur </label>
                             <input type="text" name="user_id" id="user_id" placeholder="Entrez votre identifiant utilisateur" required>
                         </div>
-                        <div>
-                            <label for="user_password">Mot de passe </label>
+                        <div class="input_authentication_container">
+                            <label id="label_authentication" for="user_password">Mot de passe </label>
                             <input type="password" name="user_password" id="user_password" placeholder="Entrez votre mot de passe" required>
                         </div>
-                        <a href="?module=user&action=sendEmail" >Mot de passe oublié ?</a>
-                        <?=$info!=null?'<div class="error">'.$info.'</div>':''?>
+                        <a href="?module=user&action=sendEmail" id="password_authentication_forget">Mot de passe oublié ?</a>
+                        <div id="error_authentication_container">
+                            <?=$info!=null?''.$info.'':''?>
+                        </div>
                         <input type="submit" value="Connexion">
                     </form>
                 </div>

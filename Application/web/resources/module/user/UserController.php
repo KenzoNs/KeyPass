@@ -94,24 +94,4 @@ class UserController extends Controller {
             Utils::infoMessage("user", "login", "Accès refusé");
         }
     }
-
-
-    public function createAndSendMail($user){
-        $objet = 'Nouveau mot de passe';
-        $to = $user['email'];
-
-        $header = "From: KeePass <no-reply@test.com> \n";
-        $header .= "Reply-To: ".$to."\n";
-        $header .= "MIME-version: 1.0\n";
-        $header .= "Content-Transfer-Encoding: 8bit";
-
-        $contenu ="<html>".
-        "<body>".
-        "<p style='text-align: center; font-size: 18px'><b>Bonjour Mr, Mme" .$user['nom']." ".$user['prenom']."</b>,</p><br/>".
-        "<p style='text-align: justify'><i><b>Nouveau mot de passe : </b></i>".Utils::genCode()."</p><br/>".
-        "</body>".
-        "</html>";
-
-        return mail($to, $objet, $contenu, $header);
-    }
 }
