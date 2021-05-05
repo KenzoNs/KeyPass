@@ -14,6 +14,7 @@ Login Page
     transform: translate(-50%, -50%);
     width: 450px;
     padding: var(--large-marge);
+    border: 1px solid black;
 }
 
 #label_authentication {

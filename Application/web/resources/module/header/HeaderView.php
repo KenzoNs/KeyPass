@@ -13,22 +13,29 @@ class HeaderView {
             <?=$module!=null?'<link rel="stylesheet" href="./resources/css/'.$module.'.css">':''?>
             <script src="javascript/javascript.js"></script>
         </head>
-    <header>
-        <nav>
-            <div id="nav_container">
-                <div id="left_nav_div">
-                    <a id="logo_nav" href="?module=home"><i class="fas fa-home fa-2x"></i></a>
-                    <form id="nav_search" action="?module=home&action=search" method="get">
-                        <input id="input_nav" type="text" name="search">
-                        <input id="submit_nav" type="submit" value="Rechercher">
-                    </form>
+    <body>
+        <header>
+            <nav>
+                <div id="nav_container">
+                    <div id="left_nav_div">
+                        <a id="logo_nav_button" href="?module=home"><i class="fas fa-home fa-lg"></i></a>
+                        <form id="nav_search" action="?module=home&action=search" method="get">
+                            <input id="input_nav" type="text" name="search" placeholder="Rechercher">
+                            <select id="select_nav_div">
+                                <option value="account" selected>compte</option>
+                                <option value="user">utilisateur</option>
+                                <option value="group" >groupe</option>
+                            </select>
+                            <input id="submit_nav_button" type="submit" value="Rechercher">
+                        </form>
+                    </div>
+                    <div id="right_nav_div">
+                        <a id="profil_button_nav" href="?module=user&action=viewMyAccount"><i id="user_nav_icon" class="far fa-user fa-lg" ></i><? echo Security::decrypt($_SESSION['user']['id_utilisateur'])?></a>
+                        <? if($_SESSION['user']['privileges'] == 2) echo "<a id=\"profil_button_nav\" href=\"#\">Panel admin</a>"?>
+                        <a id="disconnect_button" href="?module=user&action=disconnection"><i id="disconnection_nav_icon" class="fas fa-power-off fa-lg"></i>Déconnexion</a>
+                    </div>
                 </div>
-                <div id="right_nav_div">
-                    <button><a href="?module=user&action=viewMyAccount"><i class="far fa-user fa-2x"></i><? echo Security::decrypt($_SESSION['user']['id_utilisateur'])?></a></button>
-                    <button id="disconnect_button"><a  id="disconnect_text_button" href="?module=user&action=disconnection">Déconnexion</a></button>
-                </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
     <?php }
 }

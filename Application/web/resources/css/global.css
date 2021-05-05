@@ -1,8 +1,8 @@
 :root{
     --bg-color: #D0D3D4;
-    --foreground-color: #2E86C1;
-    --red-color: red;
-    --red-hover-color: #E64A19;
+    --foreground-color: #2F4F4F;
+    --red-color: #B22222;
+    --red-hover-color: #8B0000;
     --blue-color: #00BFFF;
     --blue-hover-color: #0288D1;
     --green-color: #4CAF50;
@@ -21,12 +21,14 @@
     --large-radius: 10px;
 
     --size: 14px;
-
 }
 
 body{
     background-color: var(--bg-color);
-    margin: var(--large-marge);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: var(--text-family);
 
 }
@@ -37,16 +39,17 @@ Nav
 
 nav {
     display: flex;
-    background-color: #2F4F4F;
+    background-color: var(--foreground-color);
     height: 75px;
     align-items: center;
     flex-direction: row;
     border-radius: var(--large-radius);
     padding: 0px var(--medium-marge) 0px var(--medium-marge);
+    border: 1px solid black;
+    margin: var(--large-marge);
 }
 
 #nav_container{
-    background-color: black;
     width: 100%;
     height: 50px;
     display: flex;
@@ -54,16 +57,14 @@ nav {
 
 #left_nav_div{
     display: flex;
-    background-color: black;
 }
 
 #right_nav_div{
-    background-color: purple;
-    margin-left: auto;
     display: flex;
+    margin-left: auto;
 }
 
-#logo_nav{
+#logo_nav_button{
     background-color: var(--blue-color);
     color: var(--white-color);
     display: flex;
@@ -79,6 +80,10 @@ nav {
     margin-right: var(--medium-marge);
 }
 
+#logo_nav_button:hover{
+    background-color: var(--blue-hover-color);
+}
+
 #nav_search{
     display: flex;
 }
@@ -88,19 +93,70 @@ nav {
     border-radius: var(--small-radius) 0px 0px var(--small-radius);
 }
 
-#submit_nav{
+#select_nav_div{
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    border:none;
+    outline: none;
+    border-right: 1px solid black;
+    cursor: pointer;
+}
+
+#filter_nav:hover{
+    background-color: var(--blue-hover-color);
+
+}
+
+#submit_nav_button{
     background-color: var(--blue-color);
     border-radius:  0px var(--small-radius) var(--small-radius) 0px;
 }
 
+#submit_nav_button:hover{
+    background-color: var(--blue-hover-color);
+}
+
+#user_nav_icon{
+    margin-right: var(--small-marge);
+}
+
+#profil_button_nav{
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    text-decoration: none;
+    border-radius: var(--small-radius);
+    cursor: pointer;
+    border:none;
+    outline: none;
+    width: 150px;
+    margin-right: var(--medium-marge);
+}
+
+#profil_button_nav:hover{
+    background-color: var(--blue-hover-color);
+}
+
+#disconnection_nav_icon{
+    margin-right: var(--small-marge);
+}
+
 #disconnect_button{
     background-color: var(--red-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     color: var(--white-color);
     padding: var(--size) var(--size);
     border: none;
     border-radius: var(--small-radius);
     cursor: pointer;
     border:none;
+    width: 100px;
     outline: none;
 }
 
@@ -108,31 +164,9 @@ nav {
     background-color: var(--red-hover-color);
 }
 
-
-
-#disconnect_button{
-    width: 100%;
-    background-color: var(--blue-color);
-    color: var(--white-color);
-    padding: var(--size) var(--size);
-    border: none;
-    border-radius: var(--small-radius);
-    cursor: pointer;
-    border:none;
-    outline: none;
-}
-
-#disconnect_button:hover{
-    background-color: var(--blue-hover-color);
-}
-
-#disconnect_text_button{
-    text-decoration: none;
-    color: white
-}
-
-
-
+/*
+---------------------------------------------------
+ */
 
 
 input[type=text], input[type=password]{
