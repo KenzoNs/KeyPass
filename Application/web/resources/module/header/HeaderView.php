@@ -10,6 +10,7 @@ class HeaderView {
             <link rel="stylesheet" href="./resources/css/normalize.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link rel="stylesheet" href="./resources/fa/css/all.css">
+            <link rel="stylesheet" href="./resources/css/header.css">
             <?=$module!=null?'<link rel="stylesheet" href="./resources/css/'.$module.'.css">':''?>
             <script src="javascript/javascript.js"></script>
         </head>
@@ -18,7 +19,7 @@ class HeaderView {
             <nav>
                 <div id="nav_container">
                     <div id="left_nav_div">
-                        <a id="logo_nav_button" href="?module=home"><i class="fas fa-home fa-lg"></i></a>
+                        <a class="button blue left logo" href="?module=home"><i class="fas fa-home fa-lg"></i></a>
                         <form id="nav_search" action="?module=home&action=search" method="get">
                             <input id="input_nav" type="text" name="search" placeholder="Rechercher">
                             <select id="select_nav_div">
@@ -26,7 +27,7 @@ class HeaderView {
                                 <option value="user">utilisateur</option>
                                 <option value="group" >groupe</option>
                             </select>
-                            <input id="submit_nav_button" type="submit" value="Rechercher">
+                            <input class="submit" type="submit" value="Rechercher">
                         </form>
                     </div>
                     <div id="right_nav_div">
