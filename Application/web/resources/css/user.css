@@ -5,40 +5,36 @@
 Login Page
  */
 
-#main_authentication_container{
+#body_authentication{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#authentication_container{
     background-color: #2F4F4F;
     border-radius: var(--large-radius);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 450px;
-    padding: var(--large-marge);
+    padding:  var(--medium-marge) var(--large-marge) var(--medium-marge) var(--large-marge);
     border: 1px solid black;
 }
 
-#label_authentication {
+.label_authentication {
     display: block;
 }
 
 #img_authentication_container{
     height: 150px;
-    text-align: center;
-}
-img{
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--medium-marge);
 }
 
+
 #error_authentication_container{
-    margin: var(--small-marge) 0 var(--small-marge) 0;
     height: 20px;
     display: flex;
     align-items: center;
     color: var(--red-color);
-}
-
-.input_authentication_container{
-    margin: var(--small-marge) 0 var(--small-marge) 0;
 }
 
 #password_authentication_forget{

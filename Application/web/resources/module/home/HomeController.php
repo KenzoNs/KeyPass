@@ -16,12 +16,16 @@ class HomeController extends Controller {
     }
 
     public function home(){
-        if (isset($_SESSION['user'])){
+        if (Utils::isConnected()){
             $this->header->header('Accueil');
             $this->getView()->homePage();
         }
-        else{
-            Utils::infoMessage("user", "login", "Vous n'êtes pas connecté");
+    }
+    public function search(){
+        if (isset($_SESSION['user'])){
+
+                $this->header->header('Rechercher');
+                $this->getView()->homePage();
         }
     }
 

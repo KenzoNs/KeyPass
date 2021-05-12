@@ -1,15 +1,3 @@
 @import "global.css";
 
-#container{
-    display: flex;
-    background-color: var(--foreground-color);
-    justify-content: center;
-    border-radius: var(--large-radius);
-    padding: 0px var(--medium-marge) 0px var(--medium-marge);
-    border: 1px solid black;
-    height: 100%;
-    flex: 1;
-    margin: 0px var(--large-marge) var(--large-marge) var(--large-marge);
-
-}
 

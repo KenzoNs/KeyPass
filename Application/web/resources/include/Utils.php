@@ -98,11 +98,6 @@ class Utils {
         die;
     }
 
-    static function isConnected(): bool
-    {
-        return isset($_SESSION["user"]);
-    }
-
     static function deconnection(){
         $_SESSION["user"] == null;
     }
@@ -124,27 +119,15 @@ class Utils {
         exit();
     }
 
-    static function genCode(){
-        $haz=array
-        (1,
-            rand(2,3),
-            rand(4,5),
-            rand(6,7),
-            rand(8,9),0
-        );
-
-        shuffle($haz);
-        $co="";
-        $i=0;
-
-        while($i<6){
-            $co.= $haz[$i];
-            if(!in_array($co,$haz)){
-            }else{}
-            $i++;
+    static public function isConnected(): bool{
+        if (isset($_SESSION['user'])){
+            return true;
         }
-        return $co;
+        else{
+            Utils::infoMessage("user", "login", "Vous n'êtes pas connecté");
+        }
     }
+
 
 
 }

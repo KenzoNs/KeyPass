@@ -25,42 +25,6 @@ class UserController extends Controller {
         }
     }
 
-    public function sendEmail(){
-        if (!isset($_SESSION['user'])){
-            $error = Utils::get("error");
-            $this->getView()->sendEmailPage($error);
-        }
-        else{
-            Utils::switchPage('home');
-        }
-    }
-
-    public function doSendEmail(){
-        if (!isset($_SESSION['user'])){
-            $userEmail = Utils::post("user_mail");
-            if(isset($userEmail)){
-                $user = $this->getModel()->isUserEmailExist($userEmail);
-                if($user){
-                    if($this->createAndSendMail($user)){
-                        Utils::infoMessage('user', 'login', 'Un email vous a été envoyé');
-                    }
-                    Utils::infoMessage('user', 'login', 'Erreur envoie email');
-                }
-                else{
-                    Utils::infoMessage('user', 'sendEmail', 'Cet email n\'existe pas');
-                }
-            }
-            else{
-                Utils::infoMessage('user', 'sendEmail', 'Veuillez renseigner votre email');
-            }
-        }
-        else{
-            Utils::switchPage('home');
-        }
-
-    }
-
-
     public function doLogin() {
         if(!isset($_SESSION['user'])) {
             $userId = Utils::post("user_id");
@@ -81,6 +45,13 @@ class UserController extends Controller {
         }
         else{
             Utils::switchPage('home');
+        }
+    }
+
+    public function search(){
+        if(Utils::isConnected()){
+            $search_content = Utils::get("value");
+            $this->getView()->search($this->getModel()->search($search_content));
         }
     }
 

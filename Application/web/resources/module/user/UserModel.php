@@ -55,11 +55,25 @@ class UserModel extends Connection {
         $userId = Security::encrypt($userId);
         $password = Security::encrypt($password);
         self::connection();
-        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :userId AND mot_de_passe = :password");
+        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE identifiant_utilisateur = :userId AND mot_de_passe_utilisateur = :password");
         $query->execute(array("userId" => $userId, "password" => $password));
         self::disconnection();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * recherche d'un user
+     */
+    function search($content) {
+        $content = Security::encrypt($content);
+        self::connection();
+        $query = self::$bdd->prepare("SELECT DISTINCT * FROM utilisateur WHERE nom_utilisateur LIKE :content OR prenom_utilisateur LIKE :content OR identifiant_utilisateur LIKE :content");
+        $query->execute(array(":content" => $content . '%'));
+        self::disconnection();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 
     /**
      * Enregistrement d'un nouvel user

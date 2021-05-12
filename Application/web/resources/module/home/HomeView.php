@@ -2,8 +2,12 @@
 class HomeView {
     public function homePage() {?>
             <div id="container">
-                salut
+
+                <div id="result_search">
+                    df
+                </div>
             </div>
-       </body>
+        </body>
     <?php }
+
 }

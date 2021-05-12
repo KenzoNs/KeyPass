@@ -3,18 +3,16 @@
 nav {
     display: flex;
     background-color: var(--foreground-color);
-    height: var(--medium-height);
     align-items: center;
     flex-direction: row;
     border-radius: var(--large-radius);
-    padding: 0px var(--medium-marge) 0px var(--medium-marge);
+    padding: var(--medium-marge);
     border: 1px solid black;
     margin: var(--large-marge);
 }
 
 #nav_container{
     width: 100%;
-    height: var(--small-height);
     display: flex;
 }
 

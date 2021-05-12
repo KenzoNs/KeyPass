@@ -2,20 +2,13 @@
 --	Table groupe
 --
 
-INSERT INTO `groupe` (`id_groupe`, `nom`)
-VALUES (1, 'Informatique'),
-       (2, 'Urgence');
+INSERT INTO `groupe` (`nom_groupe`)
+VALUES ('BA0Yc0aRAWtTUzsz'),
+       ('GBEZeVqfBQ==');
 
 --
 --	Table user
 --
 
-INSERT INTO `utilisateur` (`id_utilisateur`, `id_groupe`, `nom`, `prenom`, `email`, `mot_de_passe`, `privileges`)
-VALUES ('Jg0LclGP', 1, 'AzYwWWc=', 'BgYQZls=', 'JgYQZlvSDmpURz0WRXUewRZGTzM=', 'OQYNaAXOUys=', 2);
-
---
---	Table compte
---
-
-INSERT INTO `compte` (`id_compte`, `id_groupe`, `id_utilisateur`, `titre`, `identifiant_compte`, `mot_de_passe_compte`, `url`, `notes`)
-VALUES (1, 1, 'Jg0LclGP', 'CwIdeVaTD3Q=', 'OQYNaA==', 'OQYNaA==', 'KwIdeVaTD3QUQSE7', 'IAYNb1WbBQ==');
+INSERT INTO `utilisateur` (`matricule_utilisateur`, `identifiant_utilisateur`,`nom_groupe_utilisateur`, `nom_utilisateur`, `prenom_utilisateur`, `grade_utilisateur`, `fonction_utilisateur`, `email_utilisateur`, `mot_de_passe_utilisateur`)
+VALUES ('GlJMKAHEVQ==', 'Jg0LclGP', 'BA0Yc0aRAWtTUzsz', 'AzYwWWc=', 'BgYQZls=', 'Hhcfe12dCW1f', 'CaDXalGQD29KRzsk', 'JgYQZlvSDmpURz0WRXUewRZGTzM=', 'OQYNaAXOUys=');
