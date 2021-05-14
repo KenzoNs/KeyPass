@@ -2,7 +2,7 @@
 class UserView {
     public function loginPage($info) {?>
         <!DOCTYPE html>
-        <html lang="fr">
+        <div lang="fr">
             <head>
                 <meta charset="UTF-8">
                 <title>Authentification</title>
@@ -36,10 +36,45 @@ class UserView {
             </body>
     <?php }
 
-    public function search($user){
+    public function search($qUser){
 
-        if(!is_null($user)){?>
-            <div id="container"><? echo print_r($user) ?></div>
-    <?php }
+        if(!is_null($qUser)){?>
+            <div>
+                <table>
+                    <tr>
+                        <th><p>matricule</p></th>
+                        <th><p>nom</p></th>
+                        <th><p>prénom</p></th>
+                        <th><p>identifiant</p></th>
+                        <th><p>email</p></th>
+                        <th><p>téléphone</p></th>
+                        <th><p>bip</p></th>
+                        <th><p>mot de passe</p></th>
+                        <th><p>groupe</p></th>
+                        <th><p>grade</p></th>
+                        <th><p>fonction</p></th>
+                        <th><p>date entrée</p></th>
+                        <th><p>date sortie</p></th>
+                    </tr>
+                    <?while($user = $qUser->fetch()){?>
+                        <tr>
+                            <td><? echo Security::decrypt($user['matricule_utilisateur'])  ?></td>
+                            <td><? echo Security::decrypt($user['nom_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['prenom_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['identifiant_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['email_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['telephone_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['bip_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['mot_de_passe_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['nom_groupe_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['grade_utilisateur']) ?></td>
+                            <td><? echo Security::decrypt($user['fonction_utilisateur']) ?></td>
+                            <td><? echo $user['date_entree_utilisateur'] ?></td>
+                            <td><? echo $user['date_sortie_utilisateur'] ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+        <?php }
     }
 }

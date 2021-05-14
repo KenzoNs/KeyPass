@@ -70,7 +70,7 @@ class UserModel extends Connection {
         $query = self::$bdd->prepare("SELECT DISTINCT * FROM utilisateur WHERE nom_utilisateur LIKE :content OR prenom_utilisateur LIKE :content OR identifiant_utilisateur LIKE :content");
         $query->execute(array(":content" => $content . '%'));
         self::disconnection();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query;
     }
 
 

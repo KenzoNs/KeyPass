@@ -4,10 +4,10 @@ class HomeView {
             <div id="container">
 
                 <div id="result_search">
-                    df
                 </div>
             </div>
         </body>
+        </html>
     <?php }
 
 }
