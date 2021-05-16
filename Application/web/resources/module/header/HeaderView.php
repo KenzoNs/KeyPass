@@ -9,8 +9,8 @@ class HeaderView {
             <link rel="stylesheet" href="./resources/css/global.css">
             <link rel="stylesheet" href="./resources/css/normalize.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-            <link rel="stylesheet" href="./resources/fa/css/all.css">
             <link rel="stylesheet" href="./resources/css/header.css">
+            <script src="https://kit.fontawesome.com/cee5932ec1.js" crossorigin="anonymous"></script>
             <?=$module!=null?'<link rel="stylesheet" href="./resources/css/'.$module.'.css">':''?>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="./resources/js/main.js"></script>

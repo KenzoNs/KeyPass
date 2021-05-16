@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
     CHECK(privilege_utilisateur >= 0 AND privilege_utilisateur <= 1),
     PRIMARY KEY (`matricule_utilisateur`),
     KEY `fk_nom_groupe_utilisateur` (`nom_groupe_utilisateur`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
     `nom_groupe` varchar(150) NOT NULL,
     UNIQUE (nom_groupe),
     PRIMARY KEY (`nom_groupe`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 --

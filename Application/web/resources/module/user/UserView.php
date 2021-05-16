@@ -42,39 +42,67 @@ class UserView {
             <div>
                 <table>
                     <tr>
-                        <th><p>matricule</p></th>
-                        <th><p>nom</p></th>
-                        <th><p>prénom</p></th>
-                        <th><p>identifiant</p></th>
-                        <th><p>email</p></th>
-                        <th><p>téléphone</p></th>
-                        <th><p>bip</p></th>
-                        <th><p>mot de passe</p></th>
-                        <th><p>groupe</p></th>
-                        <th><p>grade</p></th>
-                        <th><p>fonction</p></th>
-                        <th><p>date entrée</p></th>
-                        <th><p>date sortie</p></th>
+                        <th class="test">Matricule</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Identifiant</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Bip</th>
+                        <th>Mot de passe</th>
+                        <th>Groupe</th>
+                        <th>Grade</th>
+                        <th>Fonction</th>
+                        <th>Date entrée</th>
+                        <th>Date sortie</th>
+                        <th></th>
+                        <th></th>
+
                     </tr>
-                    <?while($user = $qUser->fetch()){?>
-                        <tr>
-                            <td><? echo Security::decrypt($user['matricule_utilisateur'])  ?></td>
-                            <td><? echo Security::decrypt($user['nom_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['prenom_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['identifiant_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['email_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['telephone_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['bip_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['mot_de_passe_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['nom_groupe_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['grade_utilisateur']) ?></td>
-                            <td><? echo Security::decrypt($user['fonction_utilisateur']) ?></td>
-                            <td><? echo $user['date_entree_utilisateur'] ?></td>
-                            <td><? echo $user['date_sortie_utilisateur'] ?></td>
-                        </tr>
-                    <?php } ?>
+                    <tbody>
+                        <? $i = 0;
+                        while($user = $qUser->fetch()){
+                            if ($i++ & 1) { ?>
+                                <tr id="tab_pair">
+                                    <td><? echo Security::decrypt($user['matricule_utilisateur'])  ?></td>
+                                    <td><? echo strtoupper(Security::decrypt($user['nom_utilisateur'])) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['prenom_utilisateur'])) ?></td>
+                                    <td><? echo Security::decrypt($user['identifiant_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['email_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['telephone_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['bip_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['mot_de_passe_utilisateur']) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['nom_groupe_utilisateur'])) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['grade_utilisateur'])) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['fonction_utilisateur'])) ?></td>
+                                    <td><? echo $user['date_entree_utilisateur'] ?></td>
+                                    <td><? echo $user['date_sortie_utilisateur'] ?></td>
+                                    <td><a class="button blue small_height all_border_radius" href="">modifier</a></td>
+                                    <td><a class="button red small_height all_border_radius" href="">supprimer</a></td>
+                                </tr>
+                            <?} else { ?>
+                                <tr id="tab_impair">
+                                    <td><? echo Security::decrypt($user['matricule_utilisateur'])  ?></td>
+                                    <td><? echo strtoupper(Security::decrypt($user['nom_utilisateur'])) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['prenom_utilisateur'])) ?></td>
+                                    <td><? echo Security::decrypt($user['identifiant_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['email_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['telephone_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['bip_utilisateur']) ?></td>
+                                    <td><? echo Security::decrypt($user['mot_de_passe_utilisateur']) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['nom_groupe_utilisateur'])) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['grade_utilisateur'])) ?></td>
+                                    <td><? echo ucfirst(Security::decrypt($user['fonction_utilisateur'])) ?></td>
+                                    <td><? echo $user['date_entree_utilisateur'] ?></td>
+                                    <td><? echo $user['date_sortie_utilisateur'] ?></td>
+                                    <td><a class="button blue small_height all_border_radius" href="">modifier</a></td>
+                                    <td><a class="button red small_height all_border_radius" href="">supprimer</a></td>
+                                </tr>
+                            <? }
+                        }?>
+                    </tbody>
                 </table>
             </div>
-        <?php }
+        <? }
     }
 }

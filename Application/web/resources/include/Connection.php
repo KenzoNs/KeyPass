@@ -50,7 +50,7 @@ class Connection{
 
     private static function get_dbconnect_info(): array{
         $array = array(
-            "dsn" => "mysql:host=database;port=3306;dbname=keepass;charset=utf8",
+            "dsn" => "mysql:host=database;port=3306;dbname=lamentin;charset=utf8",
             "username" => "user",
             "password" => "password"
         );

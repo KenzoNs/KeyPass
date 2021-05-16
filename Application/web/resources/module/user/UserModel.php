@@ -67,7 +67,7 @@ class UserModel extends Connection {
     function search($content) {
         $content = Security::encrypt($content);
         self::connection();
-        $query = self::$bdd->prepare("SELECT DISTINCT * FROM utilisateur WHERE nom_utilisateur LIKE :content OR prenom_utilisateur LIKE :content OR identifiant_utilisateur LIKE :content");
+        $query = self::$bdd->prepare("SELECT DISTINCT * FROM utilisateur WHERE nom_utilisateur LIKE lower(:content) OR prenom_utilisateur LIKE lower(:content) OR identifiant_utilisateur LIKE lower(:content) OR grade_utilisateur LIKE lower(:content) OR fonction_utilisateur LIKE lower(:content) OR email_utilisateur LIKE lower(:content) OR bip_utilisateur LIKE lower(:content) OR telephone_utilisateur LIKE lower(:content) OR nom_groupe_utilisateur LIKE lower(:content)");
         $query->execute(array(":content" => $content . '%'));
         self::disconnection();
         return $query;

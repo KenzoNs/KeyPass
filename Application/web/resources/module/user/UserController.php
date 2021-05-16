@@ -51,7 +51,7 @@ class UserController extends Controller {
     public function search(){
         if(Utils::isConnected()){
             $search_content = Utils::get("value");
-            $this->getView()->search($this->getModel()->search($search_content));
+            $this->getView()->search($this->getModel()->search(strtolower($search_content)));
         }
     }
 

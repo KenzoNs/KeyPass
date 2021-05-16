@@ -249,5 +249,35 @@ label{
     padding-bottom: var(--small-marge);
 }
 
+table {
+    table-layout: fixed;
+    min-width: 1750px;
+    width: auto;
+    border-collapse: collapse;
+    border: 2px solid var(--blue-color);
+    box-shadow: 0 5px 50px var(--black-color);
+    color: var(--bg-color);
+}
+
+th {
+    background-color: midnightblue;
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
+}
+
+tbody tr, td, th {
+    border: 1px solid var(--black-color);
+}
+
+#tab_impair{
+    background-color: red;
+}
+
+#tab_impair{
+    background-color: blue;
+}
 
 
