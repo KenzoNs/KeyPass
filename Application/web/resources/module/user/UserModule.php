@@ -12,7 +12,7 @@ class UserModule extends Module {
 
 
         $actions = array (
-            "login", "doLogin", "disconnection", "search", "sendEmail", "doSendEmail"
+            "login", "doLogin", "search", "sendEmail", "doSendEmail", "createUser", "doCreateUser"
         );
 
         parent::__construct("user", new UserController, $actions);

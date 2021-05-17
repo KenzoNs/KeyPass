@@ -55,8 +55,8 @@ class UserView {
                         <th>Fonction</th>
                         <th>Date entrée</th>
                         <th>Date sortie</th>
-                        <th></th>
-                        <th></th>
+                        <? if($_SESSION['user']['privilege_utilisateur'] == 1)  echo '<th></th>' ?>
+                        <? if($_SESSION['user']['privilege_utilisateur'] == 1)  echo '<th></th>' ?>
 
                     </tr>
                     <tbody>
@@ -77,8 +77,8 @@ class UserView {
                                     <td><? echo ucfirst(Security::decrypt($user['fonction_utilisateur'])) ?></td>
                                     <td><? echo $user['date_entree_utilisateur'] ?></td>
                                     <td><? echo $user['date_sortie_utilisateur'] ?></td>
-                                    <td><a class="button blue small_height all_border_radius" href="">modifier</a></td>
-                                    <td><a class="button red small_height all_border_radius" href="">supprimer</a></td>
+                                    <? if($_SESSION['user']['privilege_utilisateur'] == 1)  echo '<td><a class="button blue small_height all_border_radius" href="">modifier</a></td>' ?>
+                                    <? if($_SESSION['user']['privilege_utilisateur'] == 1) echo '<td><a class="button red small_height all_border_radius" href="">supprimer</a></td>' ?>
                                 </tr>
                             <?} else { ?>
                                 <tr id="tab_impair">
@@ -95,8 +95,8 @@ class UserView {
                                     <td><? echo ucfirst(Security::decrypt($user['fonction_utilisateur'])) ?></td>
                                     <td><? echo $user['date_entree_utilisateur'] ?></td>
                                     <td><? echo $user['date_sortie_utilisateur'] ?></td>
-                                    <td><a class="button blue small_height all_border_radius" href="">modifier</a></td>
-                                    <td><a class="button red small_height all_border_radius" href="">supprimer</a></td>
+                                    <? if($_SESSION['user']['privilege_utilisateur'] == 1)  echo '<td><a class="button blue small_height all_border_radius" href="">modifier</a></td>' ?>
+                                    <? if($_SESSION['user']['privilege_utilisateur'] == 1) echo '<td><a class="button red small_height all_border_radius" href="">supprimer</a></td>' ?>
                                 </tr>
                             <? }
                         }?>

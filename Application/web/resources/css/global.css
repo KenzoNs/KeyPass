@@ -48,8 +48,11 @@
     border: 1px solid black;
     flex: 1;
     margin: 0 var(--large-marge) var(--large-marge) var(--large-marge);
+}
 
-
+.center {
+    align-items: center;
+    flex-direction: column;
 }
 
 

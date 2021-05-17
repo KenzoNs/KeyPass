@@ -9,7 +9,7 @@ class HomeModule extends Module {
     public function __construct() {
 
         $actions = array (
-            "home"
+            "home", "chooseAction"
         );
 
         parent::__construct("user", new HomeController, $actions);

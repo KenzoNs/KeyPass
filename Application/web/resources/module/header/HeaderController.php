@@ -11,9 +11,14 @@ class HeaderController extends Controller {
         parent::__construct(new HeaderModel(), new HeaderView());
     }
 
+    public function homeHeader($title){
+        $module = Utils::get("module", "home");
+        $this->getView()->displayHomeHeader($title, $module);
+    }
+
     public function header($title){
         $module = Utils::get("module", "home");
-        $this->getView()->displayheader($title, $module);
+        $this->getView()->displayHeader($title, $module);
     }
 
 }

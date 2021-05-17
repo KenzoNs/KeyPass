@@ -98,10 +98,6 @@ class Utils {
         die;
     }
 
-    static function deconnection(){
-        $_SESSION["user"] == null;
-    }
-
     static function switchPage($module, $action=null){
         header("Status: 301 Moved Permanently", false, 301);
         if(isset($action)){
@@ -113,18 +109,25 @@ class Utils {
         exit();
     }
 
-    static function infoMessage($module, $action, $info){
+    static function switchPageInfo($module, $action, $info){
         header("Status: 301 Moved Permanently", false, 301);
         header("Location: ?module=".$module."&action=".$action."&info=".$info."");
         exit();
     }
 
-    static public function isConnected(): bool{
-        if (isset($_SESSION['user'])){
-            return true;
+    static function disconnection($forced=null) {
+        if(isset($_SESSION['user'])){
+            session_unset();
+            session_destroy();
+
+            if(is_null($forced)){
+                Utils::switchPage('user', 'login');
+            }
+            Utils::switchPageInfo("user", "login", "Accès refusé");
+
         }
         else{
-            Utils::infoMessage("user", "login", "Vous n'êtes pas connecté");
+            Utils::switchPageInfo("user", "login", "Impossible vous n'êtes pas connecté(e)");
         }
     }
 

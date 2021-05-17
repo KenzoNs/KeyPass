@@ -36,11 +36,11 @@ class UserController extends Controller {
                     Utils::switchPage('home');
                 }
                 else {
-                    Utils::infoMessage('user', 'login', 'Nom d\'utilsateur et/ou mot de passe incorrect');
+                    Utils::switchPageInfo('user', 'login', 'Nom d\'utilsateur et/ou mot de passe incorrect');
                 }
             }
             else {
-                Utils::infoMessage('user', 'login', 'Veuillez remplir tous les champs');
+                Utils::switchPageInfo('user', 'login', 'Veuillez remplir tous les champs');
             }
         }
         else{
@@ -49,20 +49,44 @@ class UserController extends Controller {
     }
 
     public function search(){
-        if(Utils::isConnected()){
+        if(isset($_SESSION['user'])){
             $search_content = Utils::get("value");
             $this->getView()->search($this->getModel()->search(strtolower($search_content)));
         }
+        else{
+            Utils::disconnection();
+        }
     }
 
-    public function disconnection() {
+    public function createUser() {
         if(isset($_SESSION['user'])){
-            session_unset();
-            session_destroy();
-            Utils::switchPage('user', 'login');
+            if($_SESSION['user']['privilege_utilisateur'] == 1){
+
+
+                //TODO
+            }
+            else{
+                Utils::disconnection("true");
+            }
         }
         else{
-            Utils::infoMessage("user", "login", "Accès refusé");
+            Utils::disconnection();
+        }
+    }
+
+    public function doCreateUser() {
+        if(isset($_SESSION['user'])){
+            if($_SESSION['user']['privilege_utilisateur'] == 1){
+
+
+                //TODO
+            }
+            else{
+                Utils::disconnection("true");
+            }
+        }
+        else{
+            Utils::switchPageInfo('user', 'login', 'Vous n\'êtes pas connecté(e)');
         }
     }
 }

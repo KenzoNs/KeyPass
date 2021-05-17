@@ -16,17 +16,29 @@ class HomeController extends Controller {
     }
 
     public function home(){
-        if (Utils::isConnected()){
-            $this->header->header('Accueil');
+        if (isset($_SESSION['user'])){
+            $this->header->homeHeader('Accueil');
             $this->getView()->homePage();
         }
+        else{
+            Utils::switchPageInfo('user', 'login', 'Vous n\'êtes pas connecté(e)');
+        }
     }
-    public function search(){
-        if (isset($_SESSION['user'])){
 
-                $this->header->header('Rechercher');
-                $this->getView()->homePage();
+    public function chooseAction(){
+        if(isset($_SESSION['user'])){
+            if($_SESSION['user']['privilege_utilisateur']){
+                $this->header->header('Sélectionner');
+                $this->getView()->chooseActionPage();
+            }
+            else{
+                Utils::disconnection('true');
+            }
+        }
+        else{
+            Utils::switchPageInfo('user', 'login', 'Vous n\'êtes pas connecté(e)');
         }
     }
 
 }
+
