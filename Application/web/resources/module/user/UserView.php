@@ -1,6 +1,6 @@
 <?php
 class UserView {
-    public function loginPage($info) {?>
+    public function loginPage($info=null) {?>
         <!DOCTYPE html>
         <div lang="fr">
             <head>
@@ -105,4 +105,75 @@ class UserView {
             </div>
         <? }
     }
+
+    public function createUserPage($groups, $info=null) {?>
+        <div id="container" style="flex-direction: column; align-items: center; justify-content: normal">
+            <div style="display: flex; width: 100%; justify-content: center" class="medium_bottom_marge">
+                <h2 class="title" >Ajouter un utilisateur</h2>
+            </div>
+            <form action="?module=user&action=doCreateUser" style="display: flex; width: 100%; flex-direction: column; flex: 1; method="post">
+                <div class="medium_bottom_marge" style="display: flex; flex: 1; align-items: center">
+                    <div style=" width: 50%; display: flex; flex: 1; align-items: center; flex-direction: column">
+                        <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" for="user_mat">Matricule (*):</label>
+                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Matricule utilisateur"" required>
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" for="user_mat">Nom (*):</label>
+                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Nom utilisateur" required>
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" for="user_mat">Prénom (*):</label>
+                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Prénom utilisateur" required>
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" for="user_mat">Identifiant (*):</label>
+                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Identifiant utilisateur" required>
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" for="user_mat">Email :</label>
+                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Email utilisateur" required>
+                        </div>
+
+                        <div style="display: flex; align-items: center">
+                            <label style="width:150px" class="" for="user_id">Groupe (*):</label>
+                            <select style="width: 250px" name=type" id="search_type" class="button blue small_height all_border_radius">
+                                <?
+                                while($group = $groups->fetch()){
+                                    echo '<option value='.Security::decrypt($group["nom_groupe"]).'>'.ucfirst(Security::decrypt($group["nom_groupe"])).'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div style="width: 50%; display: flex; align-items: center; flex-direction: column">
+                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px;"  for="user_pass">Mot de passe (*):</label>
+                            <input tabindex="1" class="all_border_radius small_height medium_right_marge" id="user_pass" style="width: 250px" onfocus="transformText()" onfocusout="transformPass()" name="user_pass" placeholder="Mot de passe utilisateur" required>
+                        </div>
+
+                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" for="user_mat">Mot de passe (*):</label>
+                            <input tabindex="1" class="all_border_radius small_height medium_right_marge" style="width: 250px" type="text" name="user_mat" placeholder="Mot de passe" required>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div style="display: flex;  width: 100%">
+                    <input tabindex="3" class="button green max_width small_height all_border_radius medium_right_marge" type="submit" value="Valider">
+                    <a href="?module=home&action=chooseAction" class="button red max_width small_height all_border_radius ">Annuler</a>
+                </div>
+            </form>
+        </div>
+    <?php }
+
+
+
 }

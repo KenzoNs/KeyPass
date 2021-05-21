@@ -20,6 +20,8 @@ Login Page
 
 .label_authentication {
     display: block;
+    font-size: 22px;
+    padding-bottom: var(--small-marge);
 }
 
 #img_authentication_container{
@@ -44,4 +46,7 @@ Login Page
 
 }
 
+.div{
+    display: flex;
+}
 

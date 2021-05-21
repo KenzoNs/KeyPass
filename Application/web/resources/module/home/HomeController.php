@@ -32,7 +32,7 @@ class HomeController extends Controller {
                 $this->getView()->chooseActionPage();
             }
             else{
-                Utils::disconnection('true');
+                Utils::forceDisconnection();
             }
         }
         else{

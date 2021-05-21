@@ -1,5 +1,6 @@
 <?php
 include_once ("./resources/module/user/UserModel.php");
+include_once ("./resources/module/group/GroupModel.php");
 include_once ("./resources/module/user/UserView.php");
 include_once ("./resources/include/Security.php");
 include_once ("./resources/include/Controller.php");
@@ -54,23 +55,27 @@ class UserController extends Controller {
             $this->getView()->search($this->getModel()->search(strtolower($search_content)));
         }
         else{
-            Utils::disconnection();
+            Utils::switchPageInfo('user', 'login', 'Vous n\'êtes pas connecté(e)');
         }
     }
 
     public function createUser() {
         if(isset($_SESSION['user'])){
             if($_SESSION['user']['privilege_utilisateur'] == 1){
+                $groupModel = new GroupModel();
+                $info = Utils::get("info");
+                $this->header->header('Ajouter Utilisateur');
+
+                $this->getView()->createUserPage($groupModel->getAllNameGroup(), $info);
 
 
-                //TODO
             }
             else{
-                Utils::disconnection("true");
+                Utils::forceDisconnection();
             }
         }
         else{
-            Utils::disconnection();
+            Utils::switchPageInfo('user', 'login', 'Vous n\'êtes pas connecté(e)');
         }
     }
 
@@ -82,11 +87,24 @@ class UserController extends Controller {
                 //TODO
             }
             else{
-                Utils::disconnection("true");
+                Utils::forceDisconnection();
             }
         }
         else{
             Utils::switchPageInfo('user', 'login', 'Vous n\'êtes pas connecté(e)');
+        }
+    }
+
+    public function disconnection() {
+        if(isset($_SESSION['user'])){
+            session_unset();
+            session_destroy();
+
+            Utils::switchPage("user", "login");
+
+        }
+        else{
+            Utils::switchPageInfo("user", "login", "Impossible vous n'êtes pas connecté(e)");
         }
     }
 }

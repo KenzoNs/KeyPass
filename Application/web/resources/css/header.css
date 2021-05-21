@@ -24,3 +24,9 @@ nav {
     display: flex;
     margin-left: auto;
 }
+
+label{
+    color: var(--white-color);
+    font-size: 22px;
+    padding-bottom: var(--small-marge);
+}

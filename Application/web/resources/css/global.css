@@ -52,6 +52,7 @@
 
 .center {
     align-items: center;
+    justify-content: center;
     flex-direction: column;
 }
 
@@ -248,7 +249,7 @@ input[type=text], input[type=password]{
 
 label{
     color: var(--white-color);
-    font-size: 22px;
+    font-size: 16px;
     padding-bottom: var(--small-marge);
 }
 
@@ -283,4 +284,16 @@ tbody tr, td, th {
     background-color: blue;
 }
 
+.title{
+    color: var(--white-color);
 
+}
+
+.center_vertical {
+    display: flex;
+    align-items: center;
+}
+
+.space{
+    align-content: space-around;
+}

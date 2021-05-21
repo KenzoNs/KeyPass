@@ -115,22 +115,16 @@ class Utils {
         exit();
     }
 
-    static function disconnection($forced=null) {
-        if(isset($_SESSION['user'])){
+
+    static function forceDisconnection(){
+        if (isset($_SESSION['user'])) {
             session_unset();
             session_destroy();
-
-            if(is_null($forced)){
-                Utils::switchPage('user', 'login');
-            }
-            Utils::switchPageInfo("user", "login", "Accès refusé");
+            Utils::switchPageInfo('user', 'login', "Accès refusé");
 
         }
         else{
             Utils::switchPageInfo("user", "login", "Impossible vous n'êtes pas connecté(e)");
         }
     }
-
-
-
 }
