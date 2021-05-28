@@ -82,9 +82,14 @@ class UserController extends Controller {
     public function doCreateUser() {
         if(isset($_SESSION['user'])){
             if($_SESSION['user']['privilege_utilisateur'] == 1){
-
-
-                //TODO
+                if(Utils::post('user_mat') != null ){
+                    if(preg_match("/w([0-9]){6}/i", Utils::post('user_mat'))){
+                        Utils::switchPageInfo('user', 'createUser', 'Ok');
+                    }
+                }
+                else{
+                    Utils::switchPageInfo('user', 'createUser', 'Veuillez remplir tous les champs obligatoires');
+                }
             }
             else{
                 Utils::forceDisconnection();

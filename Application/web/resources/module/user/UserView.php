@@ -108,40 +108,42 @@ class UserView {
 
     public function createUserPage($groups, $info=null) {?>
         <div id="container" style="flex-direction: column; align-items: center; justify-content: normal">
-            <div style="display: flex; width: 100%; justify-content: center" class="medium_bottom_marge">
-                <h2 class="title" >Ajouter un utilisateur</h2>
-            </div>
-            <form action="?module=user&action=doCreateUser" style="display: flex; width: 100%; flex-direction: column; flex: 1; method="post">
+            <form action="?module=user&action=doCreateUser" style="display: flex; width: 100%; flex-direction: column; flex: 1;" method="post">
                 <div class="medium_bottom_marge" style="display: flex; flex: 1; align-items: center">
-                    <div style=" width: 50%; display: flex; flex: 1; align-items: center; flex-direction: column">
+                    <div style=" display: flex; flex: 1;  width: 50%; align-items: center; flex-direction: column;">
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" for="user_mat">Matricule (*):</label>
-                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Matricule utilisateur"" required>
+                            <input id="user_mat" tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Matricule utilisateur"" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
-                            <label style="width:150px" for="user_mat">Nom (*):</label>
-                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Nom utilisateur" required>
+                            <label style="width:150px" for="user_fname">Nom (*):</label>
+                            <input id="user_fname" tabindex="2" class="all_border_radius small_height" style="width: 250px" type="text" name="user_fname" placeholder="Nom utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
-                            <label style="width:150px" for="user_mat">Prénom (*):</label>
-                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Prénom utilisateur" required>
+                            <label style="width:150px" for="user_name">Prénom (*):</label>
+                            <input id="user_name" tabindex="3" class="all_border_radius small_height" style="width: 250px" type="text" name="user_name" placeholder="Prénom utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
-                            <label style="width:150px" for="user_mat">Identifiant (*):</label>
-                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Identifiant utilisateur" required>
+                            <label style="width:150px" for="user_identifiant">Identifiant (*):</label>
+                            <input id="user_identifiant" tabindex="4" class="all_border_radius small_height" style="width: 250px" type="text" name="user_identifiant" placeholder="Identifiant utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
-                            <label style="width:150px" for="user_mat">Email :</label>
-                            <input tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Email utilisateur" required>
+                            <label style="width:150px" for="user_rank">Grade(*) :</label>
+                            <input id="user_rank" tabindex="5" class="all_border_radius small_height" style="width: 250px" type="text" name="user_rank" placeholder="Grade utilisateur" required>
                         </div>
 
-                        <div style="display: flex; align-items: center">
-                            <label style="width:150px" class="" for="user_id">Groupe (*):</label>
-                            <select style="width: 250px" name=type" id="search_type" class="button blue small_height all_border_radius">
+                        <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" for="user_function">Fonction(*) :</label>
+                            <input id="user_function" tabindex="6" class="all_border_radius small_height" style="width: 250px" type="text" name="user_function" placeholder="Fonction utilisateur" required>
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                            <label style="width:150px" class="" for="user_group">Groupe (*):</label>
+                            <select tabindex="7" style="width: 250px" name=type" id="user_group" class="button blue small_height all_border_radius">
                                 <?
                                 while($group = $groups->fetch()){
                                     echo '<option value='.Security::decrypt($group["nom_groupe"]).'>'.ucfirst(Security::decrypt($group["nom_groupe"])).'</option>';
@@ -150,25 +152,71 @@ class UserView {
                             </select>
                         </div>
 
+                       <div style="display: flex; align-items: center; color: var(--white-color);">
+                                <label style="width:150px;"  for="user_rules">Administrateur:</label>
+                                <input id="user_rules" tabindex="8" class="all_border_radius" style=" width: 250px;" type="checkbox" name="user_rules">
+                       </div>
+
                     </div>
-                    <div style="width: 50%; display: flex; align-items: center; flex-direction: column">
-                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
-                            <label style="width:150px;"  for="user_pass">Mot de passe (*):</label>
-                            <input tabindex="1" class="all_border_radius small_height medium_right_marge" id="user_pass" style="width: 250px" onfocus="transformText()" onfocusout="transformPass()" name="user_pass" placeholder="Mot de passe utilisateur" required>
-                        </div>
 
-                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
-                            <label style="width:150px" for="user_mat">Mot de passe (*):</label>
-                            <input tabindex="1" class="all_border_radius small_height medium_right_marge" style="width: 250px" type="text" name="user_mat" placeholder="Mot de passe" required>
-                        </div>
+                    <div style="display: flex; width: 50%; align-items: center; flex-direction: column;">
+                        <div style="width: min-content;">
+                             <div style="display: flex; align-items: center;  margin-bottom: var(--medium-marge);color: grey">
+                                <label style="width:150px;"  for="user_pass1">Mot de passe (*):</label>
+                                <input tabindex="9" class="all_border_radius small_height medium_right_marge" id="user_pass1" style="width: 250px" name="user_pass1" placeholder="Mot de passe utilisateur" type="password" required>
+                                <i class="fas fa-eye button blue all_border_radius small_height" onclick="pass('user_pass1')"></i>
+                            </div>
 
+                             <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                                <label style="width:150px" for="user_pass2">Confirmer mot de passe (*):</label>
+                                <input tabindex="10" class="all_border_radius small_height medium_right_marge" id="user_pass2" style="width: 250px" name="user_pass2" placeholder="Mot de passe utilisateur" type="password" required>
+                                <i class="fas fa-eye button blue all_border_radius small_height" onclick="pass('user_pass2')"></i>
+                            </div>
+
+                            <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                                <label style="width:150px" for="user_mail">Email :</label>
+                                <input id="user_mail" tabindex="11" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mail" placeholder="Email utilisateur">
+                            </div>
+
+                            <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                                <label style="width:150px" for="user_phone">Téléphone :</label>
+                                <input id="user_phone" tabindex="12" class="all_border_radius small_height" style="width: 250px" type="text" name="user_phone" placeholder="Téléphone utilisateur">
+                            </div>
+
+                            <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                                <label style="width:150px" for="user_bip">Bip :</label>
+                                <input id="user_bip" tabindex="13" class="all_border_radius small_height" style="width: 250px" type="text" name="user_bip" placeholder="Bip utilisateur">
+                            </div>
+
+                            <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                                <label style="width:150px" for="user_edate">Date entrée:</label>
+                                <input id="user_edate" tabindex="14" class="all_border_radius small_height medium_right_marge" style="width: 15%;" name="user_edated" placeholder="Jour" type="text">
+                                <input tabindex="15" class="all_border_radius small_height medium_right_marge" style="width: 15%;" name="user_edatem" placeholder="Mois" type="text">
+                                <input tabindex="16" class="all_border_radius small_height medium_right_marge" style="width: 15%;" name="user_edatey" placeholder="Année" type="text">
+                            </div>
+
+                             <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
+                                <label style="width:150px" for="user_odate">Date sortie:</label>
+                                <input id="user_odate" tabindex="17" class="all_border_radius small_height medium_right_marge" style="width: 15%;" name="user_odated" placeholder="Jour" type="text">
+                                <input tabindex="18" class="all_border_radius small_height medium_right_marge" style="width: 15%;" name="user_odatem" placeholder="Mois" type="text">
+                                <input tabindex="19" class="all_border_radius small_height medium_right_marge" style="width: 15%;" name="user_odatey" placeholder="Année" type="text">
+                            </div>
+
+                            <div style="color: var(--white-color); height: 23px">
+                                (*) Champs obligatoires
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
+                <div id="error_authentication_container" class="small_bottom_marge">
+                    <?=$info!=null?''.$info.'':''?>
+                </div>
 
                 <div style="display: flex;  width: 100%">
-                    <input tabindex="3" class="button green max_width small_height all_border_radius medium_right_marge" type="submit" value="Valider">
-                    <a href="?module=home&action=chooseAction" class="button red max_width small_height all_border_radius ">Annuler</a>
+                    <input tabindex="20" class="button green max_width small_height all_border_radius medium_right_marge" type="submit" value="Valider">
+                    <a tabindex="21" href="?module=home&action=chooseAction" class="button red max_width small_height all_border_radius ">Annuler</a>
                 </div>
             </form>
         </div>

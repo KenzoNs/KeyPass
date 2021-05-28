@@ -34,12 +34,4 @@ function search(){
     }
 }
 
-function transformPass(){
-    const input = document.getElementById("user_pass");
-    input.attr("type", "pass");
-}
 
-function transformText(){
-    const input = document.getElementById("user_pass");
-    input.attr("type", "text");
-}
