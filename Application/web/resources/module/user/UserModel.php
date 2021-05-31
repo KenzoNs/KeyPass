@@ -33,22 +33,6 @@ class UserModel extends Connection {
     }
 
     /**
-     * Change le mot de passe d'un user
-     */
-    function changemotdepasse($nom_utilisateur, $mot_de_passe) {
-        $hash = hash("sha256", $mot_de_passe);
-        $query = self::$bdd->prepare("UPDATE user ".
-            "SET mot_de_passe = :mot_de_passe ".
-            "WHERE nom_utilisateur = :nom_utilisateur");
-        if(!$query->execute(array("mot_de_passe" => $hash, "nom_utilisateur" => $nom_utilisateur))) {
-            return $query->errorInfo()[2];
-        }
-        else {
-            return true;
-        }
-    }
-
-    /**
      * Login d'un user
      */
     function login($userId, $password) {
@@ -73,21 +57,21 @@ class UserModel extends Connection {
         return $query;
     }
 
-
-
     /**
      * Enregistrement d'un nouvel user
      */
-    function insert($nom_utilisateur, $nom, $prenom, $sexe, $jour, $mois, $annee, $email, $mot_de_passe, $pays, $description) {
-        $hash = hash("sha256", $mot_de_passe);
-        $query = self::$bdd->prepare("INSERT INTO user (is_admin, nom_utilisateur, nom, prenom, sexe, date_de_naissance, email, mot_de_passe, pays, description)".
-            "VALUES (0, :nom_utilisateur, :nom, :prenom, :sexe, :date_de_naissance, :email, :hash, :pays, :description)");
-        if(!$query->execute(array("nom_utilisateur" => $nom_utilisateur, "nom" => $nom, "prenom" => $prenom,
-            "sexe" => $sexe, "date_de_naissance" => $annee."-".$mois."-".$jour, "email" => $email, "hash" => $hash,
-            "pays" => $pays, "description" => $description))) {
+    function insert($matricule, $identifiant, $fname, $name, $rank, $function, $group, $power, $password, $mail=null, $phone=null, $bip=null, DateTime $edate=null, DateTime $odate=null) {
+        self::connection();
+        $query = self::$bdd->prepare("INSERT INTO utilisateur (matricule_utilisateur, identifiant_utilisateur, nom_groupe_utilisateur, nom_utilisateur, prenom_utilisateur, grade_utilisateur, fonction_utilisateur, mot_de_passe_utilisateur, privilege_utilisateur, email_utilisateur, bip_utilisateur, telephone_utilisateur)".
+            "VALUES (:matricule, :identifiant, :group, :fname, :name, :rank, :function, :power, :password, :mail, :phone, :bip)");
+        if(!$query->execute(array("matricule" => $matricule, "identifiant" => $identifiant, "fname" => $fname, "name" => $name,
+            "rank" => $rank, "function" => $function, "group" => $group, "power" => $power,
+            "password" => $password, "mail" => $mail, "phone" => $phone, "bip" => $bip))) {
+            self::disconnection();
             return $query->errorInfo()[2];
         }
         else {
+            self::disconnection();
             return true;
         }
     }

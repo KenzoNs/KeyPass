@@ -113,32 +113,32 @@ class UserView {
                     <div style=" display: flex; flex: 1;  width: 50%; align-items: center; flex-direction: column;">
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" for="user_mat">Matricule (*):</label>
-                            <input id="user_mat" tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" placeholder="Matricule utilisateur"" required>
+                            <input id="user_mat" tabindex="1" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mat" value="<? if (isset($_SESSION['cuser_mat'])) echo $_SESSION['cuser_mat'] ?>" placeholder="Matricule utilisateur"" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" for="user_fname">Nom (*):</label>
-                            <input id="user_fname" tabindex="2" class="all_border_radius small_height" style="width: 250px" type="text" name="user_fname" placeholder="Nom utilisateur" required>
+                            <input id="user_fname" tabindex="2" class="all_border_radius small_height" style="width: 250px" type="text" name="user_fname" value="<? if (isset($_SESSION['cuser_fname'])) echo $_SESSION['cuser_fname'] ?>" placeholder="Nom utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" for="user_name">Prénom (*):</label>
-                            <input id="user_name" tabindex="3" class="all_border_radius small_height" style="width: 250px" type="text" name="user_name" placeholder="Prénom utilisateur" required>
+                            <input id="user_name" tabindex="3" class="all_border_radius small_height" style="width: 250px" type="text" name="user_name" value="<? if (isset($_SESSION['cuser_name'])) echo $_SESSION['cuser_name'] ?>" placeholder="Prénom utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" for="user_identifiant">Identifiant (*):</label>
-                            <input id="user_identifiant" tabindex="4" class="all_border_radius small_height" style="width: 250px" type="text" name="user_identifiant" placeholder="Identifiant utilisateur" required>
+                            <input id="user_identifiant" tabindex="4" class="all_border_radius small_height" style="width: 250px" type="text" name="user_identifiant" value="<? if (isset($_SESSION['cuser_identifiant'])) echo $_SESSION['cuser_identifiant'] ?>" placeholder="Identifiant utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" for="user_rank">Grade(*) :</label>
-                            <input id="user_rank" tabindex="5" class="all_border_radius small_height" style="width: 250px" type="text" name="user_rank" placeholder="Grade utilisateur" required>
+                            <input id="user_rank" tabindex="5" class="all_border_radius small_height" style="width: 250px" type="text" name="user_rank" value="<? if (isset($_SESSION['cuser_rank'])) echo $_SESSION['cuser_rank'] ?>" placeholder="Grade utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" for="user_function">Fonction(*) :</label>
-                            <input id="user_function" tabindex="6" class="all_border_radius small_height" style="width: 250px" type="text" name="user_function" placeholder="Fonction utilisateur" required>
+                            <input id="user_function" tabindex="6" class="all_border_radius small_height" style="width: 250px" type="text" name="user_function" value="<? if (isset($_SESSION['cuser_function'])) echo $_SESSION['cuser_function'] ?>" placeholder="Fonction utilisateur" required>
                         </div>
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
@@ -175,7 +175,7 @@ class UserView {
 
                             <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                                 <label style="width:150px" for="user_mail">Email :</label>
-                                <input id="user_mail" tabindex="11" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mail" placeholder="Email utilisateur">
+                                <input id="user_mail" tabindex="11" class="all_border_radius small_height" style="width: 250px" type="text" name="user_mail" value="<? if (isset($_SESSION['cuser_mail'])) echo $_SESSION['cuser_mail']; else echo '@ght-gpne.fr' ?>" placeholder="Email utilisateur">
                             </div>
 
                             <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
