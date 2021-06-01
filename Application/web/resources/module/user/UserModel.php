@@ -23,11 +23,10 @@ class UserModel extends Connection {
     /**
      * Retourne vrai si l'email utilisateur existe
      */
-    function isUserEmailExist($email) {
-        $email = Security::encrypt($email);
+    function isUserMatExist($mat) {
         self::connection();
-        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE email = :email");
-        $query->execute(array("email" => $email));
+        $query = self::$bdd->prepare("SELECT matricule_utilisateur FROM utilisateur WHERE matricule_utilisateur = :mat");
+        $query->execute(array("mat" => $mat));
         self::disconnection();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
@@ -60,13 +59,13 @@ class UserModel extends Connection {
     /**
      * Enregistrement d'un nouvel user
      */
-    function insert($matricule, $identifiant, $fname, $name, $rank, $function, $group, $power, $password, $mail=null, $phone=null, $bip=null, DateTime $edate=null, DateTime $odate=null) {
+    function insert($cuser_infos) {
         self::connection();
         $query = self::$bdd->prepare("INSERT INTO utilisateur (matricule_utilisateur, identifiant_utilisateur, nom_groupe_utilisateur, nom_utilisateur, prenom_utilisateur, grade_utilisateur, fonction_utilisateur, mot_de_passe_utilisateur, privilege_utilisateur, email_utilisateur, bip_utilisateur, telephone_utilisateur)".
-            "VALUES (:matricule, :identifiant, :group, :fname, :name, :rank, :function, :power, :password, :mail, :phone, :bip)");
-        if(!$query->execute(array("matricule" => $matricule, "identifiant" => $identifiant, "fname" => $fname, "name" => $name,
-            "rank" => $rank, "function" => $function, "group" => $group, "power" => $power,
-            "password" => $password, "mail" => $mail, "phone" => $phone, "bip" => $bip))) {
+            "VALUES (:matricule, :identifiant, :group, :fname, :name, :rank, :function, :password, :power, :mail, :bip, :phone)");
+        if(!$query->execute(array("matricule" => $cuser_infos['mat'], "identifiant" => $cuser_infos['identifiant'], "fname" => $cuser_infos['fname'], "name" => $cuser_infos['name'],
+            "rank" => $cuser_infos['rank'], "function" => $cuser_infos['function'], "group" => $cuser_infos['group'], "power" => $cuser_infos['rules'],
+            "password" => $cuser_infos['pass'], "mail" => $cuser_infos['mail'], "phone" => $cuser_infos['phone'], "bip" => $cuser_infos['bip']))) {
             self::disconnection();
             return $query->errorInfo()[2];
         }

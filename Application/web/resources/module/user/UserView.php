@@ -143,7 +143,7 @@ class UserView {
 
                         <div style="display: flex; align-items: center; margin-bottom: var(--medium-marge)">
                             <label style="width:150px" class="" for="user_group">Groupe (*):</label>
-                            <select tabindex="7" style="width: 250px" name=type" id="user_group" class="button blue small_height all_border_radius">
+                            <select tabindex="7" style="width: 250px" name="user_group" id="user_group" class="button blue small_height all_border_radius">
                                 <?
                                 while($group = $groups->fetch()){
                                     echo '<option value='.Security::decrypt($group["nom_groupe"]).'>'.ucfirst(Security::decrypt($group["nom_groupe"])).'</option>';
@@ -154,7 +154,7 @@ class UserView {
 
                        <div style="display: flex; align-items: center; color: var(--white-color);">
                                 <label style="width:150px;"  for="user_rules">Administrateur:</label>
-                                <input id="user_rules" tabindex="8" class="all_border_radius" style=" width: 250px;" type="checkbox" name="user_rules">
+                                <input id="user_rules" tabindex="8" class="all_border_radius" style=" width: 250px;" type="checkbox" value="1"  name="user_rules">
                        </div>
 
                     </div>
