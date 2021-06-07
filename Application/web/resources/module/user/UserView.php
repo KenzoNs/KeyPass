@@ -17,8 +17,8 @@ class UserView {
                     </div>
                     <form action="?module=user&action=doLogin" method="post">
                         <div class="medium_bottom_marge">
-                            <label class="label_authentication" for="user_id">Identifiant utilisateur </label>
-                            <input tabindex="1" class="all_width all_border_radius" type="text" name="user_id" placeholder="Entrez votre identifiant utilisateur" required>
+                            <label class="label_authentication" for="user_id">Matricule utilisateur </label>
+                            <input tabindex="1" class="all_width all_border_radius" type="text" name="user_mat" placeholder="Entrez votre Matricule" required>
                         </div>
                         <div class="small_bottom_marge">
                             <label class="label_authentication" for="user_password">Mot de passe </label>
@@ -215,8 +215,8 @@ class UserView {
                 </div>
 
                 <div style="display: flex;  width: 100%">
-                    <input tabindex="20" class="button green max_width small_height all_border_radius medium_right_marge" type="submit" value="Valider">
-                    <a tabindex="21" href="?module=home&action=chooseAction" class="button red max_width small_height all_border_radius ">Annuler</a>
+                     <a tabindex="21" href="?module=home&action=chooseAction" class="medium_right_marge button red max_width small_height all_border_radius ">Annuler</a>
+                    <input tabindex="20" class="button green max_width small_height all_border_radius " type="submit" value="Valider">
                 </div>
             </form>
         </div>

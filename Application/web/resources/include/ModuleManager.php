@@ -9,7 +9,7 @@ class ModuleManager {
     public static array $modules = array(
         "user" => "UserModule",
         "home" => "HomeModule",
-        "account" => "AccountModule"
+        "group" => "GroupModule"
     );
 
     private function __construct() {}

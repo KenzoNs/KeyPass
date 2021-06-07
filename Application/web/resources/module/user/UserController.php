@@ -28,16 +28,16 @@ class UserController extends Controller {
 
     public function doLogin() {
         if(!isset($_SESSION['user'])) {
-            $userId = Utils::post("user_id");
+            $userMat = Utils::post("user_mat");
             $password = Utils::post("user_password");
-            if ($userId != null && $password != null) {
-                $user = $this->getModel()->login($userId, $password);
+            if ($userMat != null && $password != null) {
+                $user = $this->getModel()->login($userMat, $password);
                 if ($user != null) {
                     $_SESSION['user'] = $user;
                     Utils::switchPage('home');
                 }
                 else {
-                    Utils::switchPageInfo('user', 'login', 'Nom d\'utilsateur et/ou mot de passe incorrect');
+                    Utils::switchPageInfo('user', 'login', 'Matricule et/ou mot de passe incorrect');
                 }
             }
             else {

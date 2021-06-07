@@ -34,12 +34,12 @@ class UserModel extends Connection {
     /**
      * Login d'un user
      */
-    function login($userId, $password) {
-        $userId = Security::encrypt($userId);
+    function login($userMat, $password) {
+        $userMat = Security::encrypt($userMat);
         $password = Security::encrypt($password);
         self::connection();
-        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE identifiant_utilisateur = :userId AND mot_de_passe_utilisateur = :password");
-        $query->execute(array("userId" => $userId, "password" => $password));
+        $query = self::$bdd->prepare("SELECT * FROM utilisateur WHERE matricule_utilisateur = :userMat AND mot_de_passe_utilisateur = :password");
+        $query->execute(array("userMat" => $userMat, "password" => $password));
         self::disconnection();
         return $query->fetch(PDO::FETCH_ASSOC);
     }

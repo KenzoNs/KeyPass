@@ -8,6 +8,15 @@ include_once("./resources/include/Security.php");
  */
 class GroupModel extends Connection
 {
+    function isGroupNameExist($name) {
+        self::connection();
+        $query = self::$bdd->prepare("SELECT nom_groupe FROM groupe WHERE nom_groupe = :group");
+        $query->execute(array("group" => $name));
+        self::disconnection();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+
 
     /**
      * Recupere la liste des noms des groupes
@@ -20,4 +29,15 @@ class GroupModel extends Connection
         self::disconnection();
         return $rq;
     }
+
+    function createGroup($nameGroup)
+    {
+        self::connection();
+        $query = self::$bdd->prepare("INSERT INTO groupe (nom_groupe)".
+            "VALUES (:nomGroupe)");
+        $query->execute(array(":nomGroupe" => $nameGroup));
+        self::disconnection();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

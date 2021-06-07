@@ -276,8 +276,8 @@ tbody tr, td, th {
     border: 1px solid var(--black-color);
 }
 
-#tab_impair{
-    background-color: red;
+#tab_pair{
+    background-color: blueviolet;
 }
 
 #tab_impair{
